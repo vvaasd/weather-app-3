@@ -1,0 +1,15 @@
+.logo {
+  content: url('/public/images/icons/logo/logo.svg');
+}
+
+@media screen and (max-width: 886px) {
+  .logo {
+    content: url('/public/images/icons/logo/logoSm.svg');
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .logo {
+    content: url('/public/images/icons/logo/logoXs.svg');
+  }
+}

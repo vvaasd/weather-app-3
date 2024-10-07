@@ -1,0 +1,31 @@
+.icon[data-size='16'] {
+  height: 16px;
+  width: 16px;
+}
+
+.icon[data-size='24'] {
+  height: 24px;
+  width: 24px;
+}
+
+.icon[data-size='32'] {
+  height: 32px;
+  width: 32px;
+}
+
+@media screen and (max-width: 640px) {
+  .icon[data-size='16'] {
+    height: 12px;
+    width: 12px;
+  }
+
+  .icon[data-size='24'] {
+    height: 16px;
+    width: 16px;
+  }
+
+  .icon[data-size='32'] {
+    height: 24px;
+    width: 24px;
+  }
+}

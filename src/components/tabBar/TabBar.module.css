@@ -1,0 +1,69 @@
+.sliderSwitcher {
+  display: flex;
+  gap: 32px;
+  color: var(--content-color);
+}
+
+.switcher {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+}
+
+.switcherButton {
+  position: relative;
+  outline: none;
+  border: 0;
+  background: none;
+  font-weight: bold;
+  color: var(--content-color-gray);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.switcherButton::after {
+  content: '';
+  position: absolute;
+  border-radius: 4px;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 0;
+  height: 2px;
+  background-color: var(--content-color);
+  transition: transform 0.3s ease-out, width 0.3s ease-out;
+}
+
+.active.switcherButton::after {
+  transform: translateX(-50%) scaleX(1);
+  width: 100%;
+}
+
+.switcherButton:hover,
+.active {
+  color: var(--content-color);
+}
+
+@media screen and (max-width: 886px) {
+  .switcher,
+  .sliderSwitcher {
+    gap: 24px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .sliderSwitcher h2 {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .switcherButton {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .switcher,
+  .sliderSwitcher {
+    gap: 16px;
+  }
+}

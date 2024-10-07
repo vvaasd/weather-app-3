@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px;
+}
+
+@media screen and (max-width: 886px) {
+  .wrapper {
+    gap: 135px;
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    padding: 16px;
+    gap: 16px;
+  }
+}

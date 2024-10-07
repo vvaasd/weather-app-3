@@ -1,0 +1,99 @@
+.cityCard {
+  display: grid;
+  width: 100%;
+  padding: 8px;
+  color: var(--content-color);
+  text-align: center;
+}
+
+.dateTimeCity {
+  display: grid;
+  gap: 8px;
+  height: min-content;
+}
+
+.location {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.date {
+  font-size: 20px;
+}
+
+.time {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.temperature {
+  font-size: 112px;
+  font-weight: 700;
+  padding-top: 20px;
+}
+
+.weather {
+  display: grid;
+  align-self: flex-end;
+  gap: 8px;
+  font-size: 20px;
+}
+
+.description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.description img {
+  margin-right: 8px;
+}
+
+@media screen and (max-width: 1023px) {
+  .cityCard {
+    padding: 0px;
+  }
+
+  .dateTimeCity {
+    gap: 6px;
+  }
+
+  .temperature {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .location {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .dateTimeCity {
+    gap: 4px;
+  }
+
+  .date {
+    font-size: 14px;
+  }
+
+  .time {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .temperature {
+    font-size: 56px;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .weather {
+    gap: 0px;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

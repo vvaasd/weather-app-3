@@ -1,0 +1,15 @@
+:root {
+  --content-color: #f5f4f4;
+  --content-color-gray: #a6a6a6;
+  --content-color-black: #202020;
+  --card-background: #f5f4f466;
+  --clr-gray: #545454;
+  --card-background-active: #dadada;
+  --card-bar-bg-white: #dadada66;
+  --progress-position: 0%;
+  --offset-xs: 8px;
+  --offset-sm: 12px;
+  --offset-md: 16px;
+  --std-border-radius: 8px;
+  --std-blur: 50px;
+}

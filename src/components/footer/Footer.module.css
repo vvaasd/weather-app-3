@@ -1,0 +1,25 @@
+.wrapper {
+  height: 84px;
+  padding: 32px;
+  color: var(--content-color);
+  text-align: center;
+}
+
+.wrapper a {
+  color: var(--content-color);
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .wrapper {
+    font-size: 12px;
+    line-height: 16px;
+    padding: 16px;
+    height: 48px;
+  }
+}

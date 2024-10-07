@@ -1,0 +1,57 @@
+.block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  padding: 0;
+  max-width: 100%;
+  background: var(--card-background);
+  border-radius: 8px;
+
+  transition: background-color 0.2s;
+}
+
+.displayNone {
+  display: none;
+}
+.input {
+  padding: 12px 16px;
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+
+.block:hover,
+.block:focus-within,
+.active {
+  background: var(--card-background-active);
+}
+
+.icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+}
+
+@media screen and (max-width: 886px) {
+  .input {
+    padding: 12px 16px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .input {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 12px;
+  }
+}

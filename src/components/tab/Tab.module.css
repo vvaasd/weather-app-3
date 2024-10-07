@@ -1,0 +1,138 @@
+.sliderContent {
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  align-items: center;
+  overflow: hidden;
+  color: var(--content-color-black);
+}
+
+.sliderContent button {
+  display: flex;
+  justify-content: center;
+  outline: none;
+  border: none;
+  background: rgba(245, 244, 244, 0.4);
+  border-radius: 8px;
+  padding: 11px 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: opacity 0.3s, background 0.3s;
+}
+
+.sliderContent button:hover:not(button:disabled) {
+  background: var(--card-background-active);
+}
+
+/* --card-background-active */
+
+.sliderContent button:last-child img {
+  transform: rotate(180deg);
+  padding: 10;
+}
+
+.sliderContent button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.sliderWindow {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: mask-image 0.3s;
+}
+
+.sliderShadowRight {
+  mask-image: linear-gradient(90deg, #000 97%, transparent 100%);
+}
+
+.sliderShadowAll {
+  mask-image: linear-gradient(90deg, transparent 1%, #000 10%, #000 97%, transparent 100%);
+}
+
+.sliderShadowLeft {
+  mask-image: linear-gradient(90deg, transparent 1%, #000 10%);
+}
+
+.cards {
+  display: flex;
+  flex-grow: 1;
+  gap: 16px;
+  list-style-type: none;
+  transition: transform 0.3s;
+}
+
+
+/* card */
+.dayCard {
+  background: var(--card-background);
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.cardContent {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 886px) {
+  .sliderContent {
+    gap: 24px;
+  }
+
+  .cards {
+    gap: 12px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .cardContent {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .dayCard {
+    padding: 12px;
+  }
+
+  .cardContent {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .cardContent > * {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .sliderContent button {
+    padding: 5px 12px;
+  }
+
+  .sliderContent {
+    gap: 16px;
+  }
+
+  .cards {
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+  }
+}

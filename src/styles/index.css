@@ -1,0 +1,46 @@
+@import url('../styles/variables.css');
+@import url('../styles/normalize.css');
+
+@font-face {
+  font-family: 'rawline';
+  src: url('fonts/rawline-400.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'rawline';
+  src: url('fonts/rawline-700.woff') format('woff');
+  font-weight: 700;
+  font-style: bold;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'rawline', sans-serif;
+}
+
+.btn-reset {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}
+
+.list-reset {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+.blur {
+  filter: blur(var(--std-blur));
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

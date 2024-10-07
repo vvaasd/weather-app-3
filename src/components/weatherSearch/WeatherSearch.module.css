@@ -1,0 +1,19 @@
+.block {
+  position: relative;    
+  flex-basis: 506px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  transform: translateY(15px);
+  z-index: 1;
+  min-width: 100%;
+}
+
+@media screen and (max-width: 886px) {
+  .block {
+    flex-grow: 1;
+    flex-basis: 100%;
+  }
+}
