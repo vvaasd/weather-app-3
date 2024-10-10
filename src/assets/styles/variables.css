@@ -1,0 +1,22 @@
+:root {
+  --light-filled-100: #f5f4f4;
+  --light-filled-200: #dadada;
+  --light-filled-300: #c0c0c0;
+  --light-filled-400: #a6a6a6;
+  --light-filled-500: #8a8a8a;
+  --light-filled-600: #707070;
+  --light-filled-700: #545454;
+  --light-filled-800: #393939;
+  --light-filled-900: #202020;
+  --light-tone-100: rgb(245 244 244 / 40%);
+  --light-tone-200: rgb(218 218 218 / 40%);
+  --light-tone-500: rgb(138 138 138 / 40%);
+  --light-tone-600: rgb(112 112 112 / 10%);
+  --progress-position: 0%;
+  --std-border-radius: 8px;
+  --std-blur: 25px;
+  --font-family: raleway, sans-serif;
+  --transition-fast: 0.15s ease;
+  --transition-medium: 0.2s ease;
+  --transition-long: 0.3s ease;
+}

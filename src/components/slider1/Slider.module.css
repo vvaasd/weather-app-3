@@ -1,0 +1,20 @@
+.wrapper {
+  overflow: hidden;
+  display: grid;
+  gap: 36px;
+  padding: 32px;
+}
+
+@media screen and (max-width: 1023px) {
+  .wrapper {
+    gap: 24px;
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    gap: 16px;
+    padding: 16px;
+  }
+}

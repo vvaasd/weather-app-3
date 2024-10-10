@@ -1,0 +1,21 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
+  "rules": {
+    "color-hex-length": "long",
+    "selector-class-pattern": null,
+    "no-descending-specificity": null,
+    "media-feature-range-notation":null,
+    "order/order": [
+      [
+        "custom-properties",
+        "declarations"
+      ],
+      {
+        "disableFix": true,
+        "unspecified": "ignore"
+      }
+    ]
+  }
+}
+
+

@@ -1,0 +1,44 @@
+.wrapper {
+  position: relative;
+}
+
+.barStripe {
+  position: absolute;
+  top: 0;
+
+  width: 100%;
+  height: 8px;
+
+  background-color: var(--light-tone-200);
+  border-radius: var(--std-border-radius);
+
+  mask: radial-gradient(
+    circle at var(--progress-position),
+    transparent 6px,
+    black 4px,
+    black 4px
+  );
+}
+
+.barTumbler {
+  z-index: 10;
+
+  width: 8px;
+  height: 8px;
+  margin-left: calc(var(--progress-position) - 4px);
+
+  background-color: var(--light-filled-100);
+  border-radius: 50%;
+}
+
+@media screen and (max-width: 767px) {
+  .barStripe {
+    height: 6px;
+  }
+
+  .barTumbler {
+    width: 6px;
+    height: 6px;
+    margin-left: calc(var(--progress-position) - 3px);
+  }
+}

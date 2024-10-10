@@ -1,6 +1,13 @@
-export { checkCity } from './checkCity.js'
-export { validateInputValue } from './validateInputValue.js'
-export { calсulateDirection } from './calсulateDirection.js'
-export { calculatePressure, getDescriptionPressure } from './calculatePressure.js'
-export { getTime } from './getTime.js'
-export { cn } from './cn.js'
+export * from './getPressureType';
+export * from './getWindDirection';
+export * from './checkCity';
+export * from './cn';
+export * from './mapForecastData';
+export * from './replaceSpacesAndDashes';
+export * from './upperCaseFirst';
+export * from './getIsInputValueValid';
+export * from './getConvertedPressure';
+export * from './getTimeDifferenceInfo';
+export * from './getVisibilityType';
+export * from './mapWeatherNowData';
+export * from './throttle';

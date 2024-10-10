@@ -1,0 +1,11 @@
+.wrapper {
+  position: relative;
+  flex-basis: 506px;
+}
+
+@media screen and (max-width: 1023px) {
+  .wrapper {
+    flex-basis: 100%;
+    flex-grow: 1;
+  }
+}

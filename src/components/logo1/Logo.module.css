@@ -1,0 +1,23 @@
+.link {
+  height: 48px;
+}
+
+.logo {
+  content: url('/public/images/logo/logo.svg');
+}
+
+@media screen and (max-width: 1023px) {
+  .logo {
+    content: url('/public/images/logo/logoTablet.svg');
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .logo {
+    content: url('/public/images/logo/logoMobile.svg');
+  }
+
+  .link {
+    height: 32px;
+  }
+}

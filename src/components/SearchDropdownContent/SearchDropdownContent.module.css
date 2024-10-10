@@ -1,0 +1,116 @@
+.headerAndBtnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+  padding-inline: 16px;
+}
+
+.header {
+  margin: 0;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 133%;
+  color: var(--neutral-filled-900);
+}
+
+.clearHistoryBtn {
+  cursor: pointer;
+
+  width: 24px;
+  height: 24px;
+  padding: 0;
+
+  background: none;
+  border: none;
+}
+
+.clearHistoryIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.clearHistoryBtn:disabled .clearHistoryIcon {
+  color: var(--light-filled-500);
+}
+
+.historyList {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.historyElement {
+  padding: 0;
+}
+
+.historyBtn {
+  cursor: pointer;
+
+  display: block;
+
+  width: 100%;
+  margin: 0;
+  padding: 12px 16px;
+
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--neutral-filled-900);
+  text-align: left;
+
+  background: none;
+  border: none;
+}
+
+@media (hover: hover) {
+  .historyBtn:hover {
+    background-color: var(--light-filled-200);
+  }
+}
+
+.text {
+  margin: 0;
+  font-size: 20px;
+  line-height: 120%;
+  color: var(--light-filled-900);
+}
+
+.errorText {
+  padding-inline: 16px;
+}
+
+.loader {
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .clearHistoryBtn {
+    width: 16px;
+    height: 16px;
+  }
+
+  .headerAndBtnWrapper {
+    margin-bottom: 8px;
+    padding-inline: 12px;
+  }
+
+  .header {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .historyBtn {
+    padding: 8px 12px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .errorText {
+    padding-inline: 12px;
+  }
+}

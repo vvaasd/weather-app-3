@@ -1,0 +1,30 @@
+.wrapper {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 32px;
+}
+
+@media screen and (max-width: 1023px) {
+  .wrapper {
+    gap: 135px;
+    padding: 24px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .wrapper {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 639px) {
+  .wrapper {
+    gap: 16px;
+  }
+}
