@@ -17,5 +17,6 @@ export * from './SliderContent/SliderContent';
 export * from './SliderContent/SliderCardSkeleton';
 export * from './Slider/Slider';
 export * from './TabBar/TabBar';
+export * from './Tab/Tab';
 export * from './SearchDropdownContent/SearchDropdownContent';
 export * from './WeatherSearch/WeatherSearch';

@@ -1,23 +1,7 @@
 import { SLIDER_TYPES } from 'constants';
+import { Tab } from 'components';
 import { cn } from 'utils';
 import styles from './TabBar.module.css';
-
-const Tab = (props) => {
-  const { isActive, onClick, text, className, ...otherProps } = props;
-
-  return (
-    <button
-      className={cn('btn-reset', styles.btn, {
-        [styles.active]: isActive,
-        className,
-      })}
-      onClick={onClick}
-      {...otherProps}
-    >
-      <span className={styles.btnText}>{text}</span>
-    </button>
-  );
-};
 
 export const TabBar = ({ activeSliderType, handleSwitch }) => {
   return (
