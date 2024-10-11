@@ -11,3 +11,4 @@ export * from './getTimeDifferenceInfo';
 export * from './getVisibilityType';
 export * from './mapWeatherNowData';
 export * from './throttle';
+export * from './getIsCityFavorite';

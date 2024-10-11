@@ -17,6 +17,6 @@
   --std-blur: 25px;
   --font-family: raleway, sans-serif;
   --transition-fast: 0.15s ease;
-  --transition-medium: 0.2s ease;
-  --transition-long: 0.3s ease;
+  --transition-medium: 0.3s ease;
+  --transition-long: 0.5s ease;
 }

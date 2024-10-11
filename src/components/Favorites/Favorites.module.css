@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 12px;
+  padding-inline: 16px;
+}
+
+.title {
+  margin-block: 0;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--neutral-filled-900);
+}
+
+@media (max-width: 767px) {
+  .header {
+    margin-bottom: 8px;
+    padding-inline: 12px;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

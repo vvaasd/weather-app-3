@@ -94,10 +94,6 @@ button {
   font-family: inherit;
 }
 
-button:disabled {
-  pointer-events: none;
-}
-
 button:not(:disabled) {
   cursor: pointer;
 }

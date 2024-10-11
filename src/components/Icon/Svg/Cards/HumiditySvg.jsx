@@ -1,4 +1,4 @@
-export const HumiditySvg = ({ ...props }) => {
+export const HumiditySvg = (props) => {
   return (
     <svg
       {...props}

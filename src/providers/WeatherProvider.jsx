@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { WeatherContext } from 'contexts';
-import { ApiService } from 'services';
+import { ApiService, StorageService } from 'services';
+import { MAX_FAVORITE_CITIES, LS_KEYS } from 'constants';
 
 export const WeatherContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentCity, setCurrentCity] = useState(null);
   const [currentWeather, setCurrentWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
+  const [favoriteCities, setFavoriteCities] = useState(
+    StorageService.get(LS_KEYS.favoriteCities) || [],
+  );
 
   const fetchAndSetWeatherData = async (cityInfo) => {
     try {
@@ -25,6 +29,25 @@ export const WeatherContextProvider = ({ children }) => {
         setIsLoading(false);
       }
     }
+  };
+
+  const onChangeFavoriteCities = (cityInfo) => {
+    const newCities = [...favoriteCities];
+
+    const cityIndex = newCities.findIndex(
+      (city) => city.name === cityInfo.name,
+    );
+
+    if (cityIndex !== -1) {
+      newCities.splice(cityIndex, 1);
+    } else if (newCities.length < MAX_FAVORITE_CITIES) {
+      newCities.push(cityInfo);
+    } else {
+      return;
+    }
+
+    StorageService.set(LS_KEYS.favoriteCities, newCities);
+    setFavoriteCities(newCities);
   };
 
   const onPageLoad = () => {
@@ -64,6 +87,8 @@ export const WeatherContextProvider = ({ children }) => {
         setCurrentWeather,
         forecast,
         setForecast,
+        favoriteCities,
+        onChangeFavoriteCities,
       }}
     >
       {children}

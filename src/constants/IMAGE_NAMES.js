@@ -5,6 +5,7 @@ export const IMAGE_NAMES = {
   search: 'search',
   arrowLeft: 'arrowLeft',
   trashBin: 'trashBin',
+  heart: 'heart',
 
   humidity: 'humidity',
   pressure: 'pressure',

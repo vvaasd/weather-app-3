@@ -1,4 +1,4 @@
-export const VisibilitySvg = ({ ...props }) => {
+export const VisibilitySvg = (props) => {
   return (
     <svg
       {...props}

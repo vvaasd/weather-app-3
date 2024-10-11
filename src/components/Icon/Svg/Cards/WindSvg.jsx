@@ -1,4 +1,4 @@
-export const WindSvg = ({ ...props }) => {
+export const WindSvg = (props) => {
   return (
     <svg
       {...props}

@@ -1,4 +1,4 @@
-export const ArrowLeftSvg = ({ ...props }) => {
+export const ArrowLeftSvg = (props) => {
   return (
     <svg
       {...props}
@@ -10,7 +10,7 @@ export const ArrowLeftSvg = ({ ...props }) => {
     >
       <path
         d="M16 3L7 12L16 21"
-        stroke="var(--light-filled-700)"
+        stroke="#545454"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"

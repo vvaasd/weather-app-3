@@ -1,4 +1,4 @@
-export const SunsetSvg = ({ ...props }) => {
+export const SunsetSvg = (props) => {
   return (
     <svg
       {...props}

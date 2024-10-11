@@ -3,9 +3,23 @@
   flex-basis: 506px;
 }
 
+.dropdown {
+  max-height: calc(100dvh - (32px * 2) - 16px - 48px - 32px);
+}
+
 @media screen and (max-width: 1023px) {
   .wrapper {
     flex-basis: 100%;
     flex-grow: 1;
+  }
+
+  .dropdown {
+    max-height: calc(100dvh - (24px * 2) - 16px - 48px - 24px);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .dropdown {
+    max-height: calc(100dvh - (16px * 2) - 12px - 32px - 16px);
   }
 }

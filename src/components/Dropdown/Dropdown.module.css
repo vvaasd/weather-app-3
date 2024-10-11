@@ -4,6 +4,7 @@
   position: absolute;
   z-index: 1;
 
+  overflow-y: auto;
   flex-direction: column;
 
   box-sizing: border-box;

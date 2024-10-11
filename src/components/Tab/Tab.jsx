@@ -6,6 +6,7 @@ export const Tab = (props) => {
 
   return (
     <button
+      type="button"
       className={cn('btn-reset', styles.btn, {
         [styles.active]: isActive,
         className,

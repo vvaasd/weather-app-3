@@ -4,6 +4,7 @@ import { LogoSmallSvg } from './LogoSmallSvg';
 import { SearchSvg } from './SearchSvg';
 import { ArrowLeftSvg } from './ArrowLeftSvg';
 import { TrashBinSvg } from './TrashBinSvg';
+import { HeartSvg } from './HeartSvg';
 
 // cards svg
 import { HumiditySvg } from './Cards/HumiditySvg';
@@ -24,6 +25,7 @@ export const svgComponents = {
   search: SearchSvg,
   arrowLeft: ArrowLeftSvg,
   trashBin: TrashBinSvg,
+  heart: HeartSvg,
 
   humidity: HumiditySvg,
   pressure: PressureSvg,

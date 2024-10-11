@@ -1,0 +1,78 @@
+.wrapper {
+  position: relative;
+}
+
+.btn {
+  display: block;
+
+  width: 100%;
+  padding: 12px 16px;
+
+  color: var(--neutral-filled-900);
+  text-align: left;
+
+  background: none;
+  border: none;
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    background-color: var(--light-filled-200);
+  }
+
+  .likeBtn:not(:disabled):hover .likeIcon {
+    fill: var(--light-filled-700);
+  }
+}
+
+@media (hover: none) {
+  .btn:active {
+    background-color: var(--light-filled-200);
+  }
+
+  .likeBtn:not(:disabled):active .likeIcon {
+    fill: var(--light-filled-700);
+  }
+}
+
+.text {
+  margin-block: 0;
+  font-size: 20px;
+  line-height: 24px;
+  color: var(--light-filled-900);
+}
+
+.likeBtn {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+
+  width: 24px;
+  height: 24px;
+}
+
+.likeBtn:disabled .likeIcon {
+  stroke: var(--light-filled-500);
+}
+
+.likeIcon:not(.filled) {
+  fill: transparent;
+}
+
+@media (max-width: 767px) {
+  .btn {
+    padding: 8px 12px;
+  }
+
+  .text {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .likeBtn {
+    right: 12px;
+    width: 16px;
+    height: 16px;
+  }
+}
