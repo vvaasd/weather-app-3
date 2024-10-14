@@ -1,17 +1,39 @@
-import { SEARCH_STATUSES, IMAGE_NAMES } from 'constants';
-import { Preloader, Icon, WeatherCard, Favorites } from 'components';
-import { cn } from 'utils';
+import { SEARCH_STATUSES, IMAGE_NAMES, MAX_FAVORITE_CITIES } from 'constants';
+import {
+  Preloader,
+  Icon,
+  WeatherCard,
+  Favorites,
+  WeatherCardSkeleton,
+} from 'components';
+import {
+  cn,
+  getIsCityFavorite,
+  splitStringByStart,
+  upperCaseFirst,
+} from 'utils';
+import { useContext } from 'react';
+import { WeatherContext } from 'contexts';
 import styles from './SearchDropdownContent.module.css';
 
 export const SearchDropdownContent = (props) => {
-  const { searchStatus, history, clearHistory, foundResult, onSelectResult } =
-    props;
+  const {
+    searchStatus,
+    history,
+    clearHistory,
+    queryCities,
+    onSelectQueryCity,
+    foundResult,
+    onSelectResult,
+    highlightedCityText,
+  } = props;
+
+  const { favorites, onChangeFavorites } = useContext(WeatherContext);
 
   let title = '';
   let content = null;
-
   switch (searchStatus) {
-    case SEARCH_STATUSES.loading:
+    case SEARCH_STATUSES.loader:
       title = 'Ищем...';
       content = (
         <div className={styles.loaderWrapper}>
@@ -20,32 +42,98 @@ export const SearchDropdownContent = (props) => {
       );
       break;
 
+    case SEARCH_STATUSES.loadingResult:
+      title = 'Результат поиска';
+      content = <WeatherCardSkeleton className={styles.weatherCard} />;
+      break;
+
     case SEARCH_STATUSES.success:
       title = 'Результат поиска';
-      content = <WeatherCard cityInfo={foundResult} onClick={onSelectResult} />;
+      content = (
+        <WeatherCard
+          className={styles.weatherCard}
+          cityAndWeatherInfo={foundResult}
+          onClick={onSelectResult}
+          isFavorite={getIsCityFavorite(foundResult.city.name, favorites)}
+          isFavoriteBtnDisabled={favorites.length >= MAX_FAVORITE_CITIES}
+          onClickFavorite={onChangeFavorites}
+        />
+      );
       break;
 
     case SEARCH_STATUSES.history:
-      title = 'Недавно смотрели';
-      if (history.length === 0) {
-        content = (
-          <p className={cn(styles.text, styles.errorText)}>
-            История поиска пустая.
-          </p>
-        );
-      } else {
-        content = (
-          <>
-            <ul className={'list-reset'}>
+      if (!queryCities.length) {
+        title = 'Недавно смотрели';
+        if (history.length === 0) {
+          content = (
+            <p className={cn(styles.text, styles.errorText)}>
+              История поиска пустая.
+            </p>
+          );
+        } else {
+          content = (
+            <ul className={cn(styles.cardsList, 'list-reset')}>
               {history
-                .map((cityInfo) => (
-                  <li key={cityInfo.name}>
-                    <WeatherCard cityInfo={cityInfo} onClick={onSelectResult} />
+                .map((historyElement) => (
+                  <li key={`history-city_${historyElement.city.id}`}>
+                    <WeatherCard
+                      className={styles.weatherCard}
+                      cityAndWeatherInfo={historyElement}
+                      onClick={onSelectResult}
+                      isFavorite={getIsCityFavorite(
+                        historyElement.city.name,
+                        favorites,
+                      )}
+                      isFavoriteBtnDisabled={
+                        favorites.length >= MAX_FAVORITE_CITIES
+                      }
+                      onClickFavorite={onChangeFavorites}
+                    />
                   </li>
                 ))
                 .reverse()}
             </ul>
-          </>
+          );
+        }
+      } else {
+        title = 'Города по запросу';
+        content = (
+          <ul className={'list-reset'}>
+            {queryCities.map((cityInfo) => {
+              const [highlightedPart, unhighlightedPart] = splitStringByStart(
+                cityInfo.name,
+                highlightedCityText,
+              );
+
+              return (
+                <li
+                  className={styles.queryCity}
+                  key={`query-city_${cityInfo.id}`}
+                >
+                  <button
+                    type="button"
+                    className={cn(styles.queryCityBtn, 'btn-reset')}
+                    onClick={() => {
+                      onSelectQueryCity(cityInfo);
+                    }}
+                  >
+                    {highlightedPart && (
+                      <span className={cn(styles.text, styles.highlighted)}>
+                        {upperCaseFirst(highlightedPart)}
+                      </span>
+                    )}
+                    {unhighlightedPart && (
+                      <span className={cn(styles.text, styles.unhighlighted)}>
+                        {highlightedPart
+                          ? unhighlightedPart
+                          : upperCaseFirst(unhighlightedPart)}
+                      </span>
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
         );
       }
       break;
@@ -65,8 +153,8 @@ export const SearchDropdownContent = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      {searchStatus === SEARCH_STATUSES.history && (
-        <Favorites onCitySelect={onSelectResult} />
+      {searchStatus === SEARCH_STATUSES.history && !queryCities.length && (
+        <Favorites onSelect={onSelectResult} />
       )}
       <div>
         <div className={styles.header}>

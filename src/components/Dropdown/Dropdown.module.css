@@ -10,7 +10,8 @@
   box-sizing: border-box;
   width: 100%;
   margin-top: 16px;
-  padding-block: 16px;
+  padding-block: 10px;
+  padding-right: 0;
 
   visibility: hidden;
   opacity: 0;
@@ -28,6 +29,6 @@
 @media (max-width: 767px) {
   .dropdown {
     margin-top: 12px;
-    padding-block: 12px;
+    padding-block: 7px;
   }
 }

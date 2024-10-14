@@ -1,5 +1,6 @@
 export const SEARCH_STATUSES = {
-  loading: 'loading',
+  loader: 'loading',
+  loadingResult: 'loadingResult',
   notFound: 'notFound',
   success: 'success',
   history: 'history',

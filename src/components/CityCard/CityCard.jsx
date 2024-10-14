@@ -6,9 +6,12 @@ import { DateService } from 'services';
 import styles from './CityCard.module.css';
 
 export const CityCard = () => {
-  const { currentCity, currentWeather, isLoading } = useContext(WeatherContext);
+  const { weatherData } = useContext(WeatherContext);
 
-  if (isLoading || !currentCity || !currentWeather) {
+  const currentCity = weatherData?.city || null;
+  const currentWeather = weatherData?.weather?.now || null;
+
+  if (!currentCity || !currentWeather) {
     return <CityCardSkeleton />;
   }
 
@@ -22,8 +25,6 @@ export const CityCard = () => {
   );
   const timeText = DateService.getFormattedShortTime(dateByTimezone);
   const weatherTypeText = upperCaseFirst(currentWeather.weatherType);
-  const temperatureValue = Math.floor(currentWeather.temperature);
-  const temperatureFeelsValue = Math.floor(currentWeather.temperatureFeels);
 
   return (
     <section className={styles.cityCard}>
@@ -32,7 +33,7 @@ export const CityCard = () => {
         <p className={styles.date}>{dateText}</p>
         <time className={styles.time}>{timeText}</time>
       </div>
-      <p className={styles.temperature}>{temperatureValue}</p>
+      <p className={styles.temperature}>{currentWeather.temperature}°</p>
       <div className={styles.weather}>
         <div className={styles.description}>
           <img
@@ -43,7 +44,7 @@ export const CityCard = () => {
           <span>{weatherTypeText}</span>
         </div>
         <p className={styles.temperatureFeels}>
-          Ощущается как {temperatureFeelsValue}°
+          Ощущается как {currentWeather.temperatureFeels}°
         </p>
       </div>
     </section>

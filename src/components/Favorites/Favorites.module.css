@@ -4,7 +4,7 @@
   justify-content: space-between;
 
   margin-bottom: 12px;
-  padding-inline: 16px;
+  margin-left: 16px;
 }
 
 .title {
@@ -13,17 +13,35 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: var(--neutral-filled-900);
+  color: var(--light-filled-900);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.weatherCard {
+  margin-left: 16px;
 }
 
 @media (max-width: 767px) {
   .header {
     margin-bottom: 8px;
-    padding-inline: 12px;
+    margin-left: 12px;
   }
 
   .title {
     font-size: 16px;
     line-height: 20px;
+  }
+
+  .list {
+    gap: 8px;
+  }
+
+  .weatherCard {
+    margin-inline: 12px;
   }
 }

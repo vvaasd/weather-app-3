@@ -45,10 +45,6 @@
   line-height: 1;
 }
 
-.temperature::after {
-  content: '°';
-}
-
 .weather {
   display: flex;
   flex-direction: column;

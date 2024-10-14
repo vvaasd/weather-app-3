@@ -1,78 +1,142 @@
 .wrapper {
-  position: relative;
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--std-border-radius);
+  background-image: url('/public/images/background.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.wrapper.skeleton {
+  background: none;
+  background-color: var(--light-tone-200);
 }
 
 .btn {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
   width: 100%;
-  padding: 12px 16px;
+  padding: 16px;
 
-  color: var(--neutral-filled-900);
-  text-align: left;
-
-  background: none;
-  border: none;
+  color: var(--light-filled-100);
 }
 
-@media (hover: hover) {
-  .btn:hover {
-    background-color: var(--light-filled-200);
-  }
-
-  .likeBtn:not(:disabled):hover .likeIcon {
-    fill: var(--light-filled-700);
-  }
+.block {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-@media (hover: none) {
-  .btn:active {
-    background-color: var(--light-filled-200);
-  }
-
-  .likeBtn:not(:disabled):active .likeIcon {
-    fill: var(--light-filled-700);
-  }
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .text {
-  margin-block: 0;
-  font-size: 20px;
-  line-height: 24px;
-  color: var(--light-filled-900);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.rightContent {
+  position: relative;
+  width: 56px;
+
+  border-radius: var(--std-border-radius);
+
+  backdrop-filter: blur(var(--std-blur));
+  background-color: var(--light-tone-600);
 }
 
 .likeBtn {
   position: absolute;
   top: 50%;
-  right: 16px;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   width: 24px;
   height: 24px;
 }
 
+.likeIcon {
+  fill: var(--light-filled-100);
+  stroke: var(--light-filled-100);
+}
+
 .likeBtn:disabled .likeIcon {
-  stroke: var(--light-filled-500);
+  stroke: var(--light-tone-500);
+}
+
+@media (hover: hover) {
+  .likeBtn:not(:disabled):hover .likeIcon {
+    fill: var(--light-filled-100);
+  }
+}
+
+@media (hover: none) {
+  .likeBtn:not(:disabled):active .likeIcon {
+    fill: var(--light-filled-100);
+  }
 }
 
 .likeIcon:not(.filled) {
   fill: transparent;
 }
 
+.leftTitleSkeleton {
+  width: 108px;
+  height: 32px;
+}
+
+.rightTitleSkeleton {
+  width: 32px;
+  height: 32px;
+}
+
+.textSkeleton {
+  width: 56px;
+  height: 20px;
+}
+
 @media (max-width: 767px) {
   .btn {
-    padding: 8px 12px;
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 20px;
   }
 
   .text {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16px;
   }
 
+  .rightContent {
+    width: 40px;
+  }
+
   .likeBtn {
-    right: 12px;
     width: 16px;
+    height: 16px;
+  }
+
+  .leftTitleSkeleton {
+    width: 72px;
+    height: 20px;
+  }
+
+  .rightTitleSkeleton {
+    width: 24px;
+    height: 20px;
+  }
+
+  .textSkeleton {
+    width: 48px;
     height: 16px;
   }
 }

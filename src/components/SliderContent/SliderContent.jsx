@@ -9,9 +9,11 @@ import styles from './SliderContent.module.css';
 export const SliderContent = (props) => {
   const { activeSlider } = props;
 
-  const { forecast, isLoading } = useContext(WeatherContext);
+  const { weatherData } = useContext(WeatherContext);
 
-  const sliderData = forecast && !isLoading ? forecast[activeSlider] : null;
+  const forecast = weatherData?.weather?.forecast || null;
+
+  const sliderData = forecast ? forecast[activeSlider] : null;
 
   const [translateX, setTranslateX] = useState(0);
   const [stepValue, setStepValue] = useState(0);
@@ -53,7 +55,7 @@ export const SliderContent = (props) => {
   useEffect(() => {
     updateStepValue();
     // eslint-disable-next-line
-  }, [activeSlider, isLoading, sliderWidth, sliderContentWidth]);
+  }, [activeSlider, weatherData, sliderWidth, sliderContentWidth]);
 
   return (
     <div className={styles.wrapper}>

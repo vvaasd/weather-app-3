@@ -13,9 +13,11 @@ import { CardSkeleton } from 'components';
 import styles from './CardList.module.css';
 
 export const CardList = () => {
-  const { currentWeather, isLoading } = useContext(WeatherContext);
+  const { weatherData } = useContext(WeatherContext);
 
-  if (isLoading || !currentWeather) {
+  const currentWeather = weatherData?.weather?.now || null;
+
+  if (!currentWeather) {
     return (
       <ul className={cn(styles.list, 'list-reset')}>
         {Array.from({ length: 6 }).map((_, index) => (

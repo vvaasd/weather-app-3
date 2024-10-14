@@ -22,3 +22,4 @@ export * from './SearchDropdownContent/SearchDropdownContent';
 export * from './WeatherSearch/WeatherSearch';
 export * from './WeatherCard/WeatherCard';
 export * from './Favorites/Favorites';
+export * from './WeatherCard/WeatherCardSkeleton';

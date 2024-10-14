@@ -1,3 +1,3 @@
-export const getIsCityFavorite = (cityName, favoriteCities) => {
-  return favoriteCities.some((cityInfo) => cityInfo.name === cityName);
+export const getIsCityFavorite = (cityName, favorites) => {
+  return favorites.some((favorite) => favorite.city.name === cityName);
 };

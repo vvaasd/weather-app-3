@@ -1,7 +1,7 @@
-export const mapWeatherNowData = (data) => {
+export const mapCurrentWeatherData = (data) => {
   return {
-    temperature: data.main.temp,
-    temperatureFeels: data.main.feels_like,
+    temperature: Math.round(data.main.temp),
+    temperatureFeels: Math.round(data.main.feels_like),
     iconName: data.weather[0].icon,
     weatherType: data.weather[0].description,
 
