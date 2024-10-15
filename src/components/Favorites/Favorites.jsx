@@ -1,7 +1,7 @@
 import { MAX_FAVORITE_CITIES } from 'constants';
 import { WeatherCard } from 'components';
 import { useContext } from 'react';
-import { WeatherContext } from 'contexts';
+import { WeatherContext } from 'context';
 import { cn, getIsCityFavorite } from 'utils';
 import styles from './Favorites.module.css';
 
@@ -29,7 +29,7 @@ export const Favorites = (props) => {
           <li key={`favorite_${favorite.city.id}`}>
             <WeatherCard
               className={styles.weatherCard}
-              cityAndWeatherInfo={favorite}
+              weatherData={favorite}
               onClick={onSelect}
               isFavorite={getIsCityFavorite(favorite.city.name, favorites)}
               isFavoriteBtnDisabled={favorites.length >= MAX_FAVORITE_CITIES}

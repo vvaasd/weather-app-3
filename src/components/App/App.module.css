@@ -26,6 +26,10 @@
   padding: 32px;
 }
 
+.error {
+  padding: 160px 32px;
+}
+
 @media screen and (min-width: 1024px) {
   .container {
     width: 1120px;
@@ -46,6 +50,10 @@
     gap: 48px;
     padding: 24px;
   }
+
+  .error {
+    padding: 333px 24px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -56,5 +64,9 @@
   .main {
     gap: 32px;
     padding: 16px;
+  }
+
+  .error {
+    padding: 230px 16px;
   }
 }

@@ -1,10 +1,11 @@
-import { useRef } from 'react';
-import { Footer, CityCard, CardList, Header, Slider } from 'components';
-import { WeatherContextProvider } from 'providers';
-import { ApplicationContext } from 'contexts';
+import { useContext, useRef } from 'react';
+import { Footer, CityCard, CardList, Header, Slider, Error } from 'components';
+import { BlurContext, WeatherContext } from 'context';
 import styles from './App.module.css';
 
 export const App = () => {
+  const { weatherData, isWeatherDataFailed } = useContext(WeatherContext);
+
   const contentToBlurRef = useRef(null);
 
   const highlightHeader = () => {
@@ -20,21 +21,21 @@ export const App = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <ApplicationContext.Provider
-          value={{ highlightHeader, unhighlightHeader }}
-        >
-          <WeatherContextProvider>
-            <Header />
-            <div ref={contentToBlurRef}>
-              <main className={styles.main}>
-                <CityCard />
-                <CardList />
-              </main>
-              <Slider />
-              <Footer />
-            </div>
-          </WeatherContextProvider>
-        </ApplicationContext.Provider>
+        <BlurContext.Provider value={{ highlightHeader, unhighlightHeader }}>
+          <Header />
+        </BlurContext.Provider>
+        <div ref={contentToBlurRef}>
+          {!isWeatherDataFailed ? (
+            <main className={styles.main}>
+              <CityCard weatherData={weatherData} />
+              <CardList weatherData={weatherData} />
+            </main>
+          ) : (
+            <Error className={styles.error} isLarge isLight />
+          )}
+          <Slider />
+          <Footer />
+        </div>
       </div>
     </div>
   );

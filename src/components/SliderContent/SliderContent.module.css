@@ -9,6 +9,10 @@
   color: 202020;
 }
 
+.error {
+  padding-block: 8px;
+}
+
 .sliderLimiter {
   position: relative;
   overflow: hidden;
@@ -95,9 +99,17 @@
   .card {
     flex-direction: column;
   }
+
+  .error {
+    padding-block: 44px;
+  }
 }
 
 @media screen and (max-width: 767px) {
+  .error {
+    padding-block: 8px;
+  }
+
   .card {
     flex-direction: row;
     gap: 12px;
@@ -139,6 +151,10 @@
 }
 
 @media screen and (max-width: 639px) {
+  .error {
+    padding-block: 36px;
+  }
+
   .card {
     flex-direction: column;
   }

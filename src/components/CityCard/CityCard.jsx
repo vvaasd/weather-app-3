@@ -1,12 +1,10 @@
-import { useContext } from 'react';
 import { CityCardSkeleton } from 'components';
-import { WeatherContext } from 'contexts';
 import { upperCaseFirst } from 'utils';
 import { DateService } from 'services';
 import styles from './CityCard.module.css';
 
-export const CityCard = () => {
-  const { weatherData } = useContext(WeatherContext);
+export const CityCard = (props) => {
+  const { weatherData } = props;
 
   const currentCity = weatherData?.city || null;
   const currentWeather = weatherData?.weather?.now || null;

@@ -24,6 +24,11 @@
   color: var(--light-filled-100);
 }
 
+.error {
+  padding: 16px;
+  flex-grow: 1;
+}
+
 .block {
   width: 100%;
   display: flex;
@@ -103,6 +108,10 @@
 
 @media (max-width: 767px) {
   .btn {
+    padding: 12px;
+  }
+
+  .error {
     padding: 12px;
   }
 

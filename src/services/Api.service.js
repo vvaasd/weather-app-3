@@ -106,24 +106,24 @@ export class ApiService {
     }
   }
 
-  static async getCitiesWeatherData(citiesAndWeatherData) {
+  static async getCitiesWeatherData(weatherDataArray) {
     try {
-      const favoritesWithWeather = await Promise.all(
-        citiesAndWeatherData.map(async (favorite) => {
+      const dataWithWeather = await Promise.all(
+        weatherDataArray.map(async (weatherDataElement) => {
           try {
-            const { city, weather } = await ApiService.getWeatherData(
-              favorite.city,
+            const newWeatherData = await ApiService.getWeatherData(
+              weatherDataElement.city,
             );
 
-            return { city, weather };
+            return newWeatherData;
           } catch (error) {
             console.log(error);
-            return { city: citiesAndWeatherData.city, isError: true };
+            return { city: weatherDataElement.city, isError: true };
           }
         }),
       );
 
-      return favoritesWithWeather;
+      return dataWithWeather;
     } catch (error) {
       return Promise.reject(error);
     }

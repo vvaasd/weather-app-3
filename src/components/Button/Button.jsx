@@ -7,7 +7,7 @@ export const Button = (props) => {
   return (
     <button
       type="button"
-      className={cn('btn-reset', styles.button, { className })}
+      className={cn('btn-reset', styles.button, className)}
       {...otherProps}
     >
       {children}

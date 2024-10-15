@@ -5,6 +5,7 @@ import {
   WeatherCard,
   Favorites,
   WeatherCardSkeleton,
+  Error,
 } from 'components';
 import {
   cn,
@@ -13,7 +14,7 @@ import {
   upperCaseFirst,
 } from 'utils';
 import { useContext } from 'react';
-import { WeatherContext } from 'contexts';
+import { WeatherContext } from 'context';
 import styles from './SearchDropdownContent.module.css';
 
 export const SearchDropdownContent = (props) => {
@@ -43,7 +44,7 @@ export const SearchDropdownContent = (props) => {
       break;
 
     case SEARCH_STATUSES.loadingResult:
-      title = 'Результат поиска';
+      title = 'Ищем...';
       content = <WeatherCardSkeleton className={styles.weatherCard} />;
       break;
 
@@ -52,9 +53,9 @@ export const SearchDropdownContent = (props) => {
       content = (
         <WeatherCard
           className={styles.weatherCard}
-          cityAndWeatherInfo={foundResult}
+          weatherData={foundResult}
           onClick={onSelectResult}
-          isFavorite={getIsCityFavorite(foundResult.city.name, favorites)}
+          isFavorite={getIsCityFavorite(foundResult?.city?.name, favorites)}
           isFavoriteBtnDisabled={favorites.length >= MAX_FAVORITE_CITIES}
           onClickFavorite={onChangeFavorites}
         />
@@ -71,6 +72,7 @@ export const SearchDropdownContent = (props) => {
             </p>
           );
         } else {
+          console.log(history);
           content = (
             <ul className={cn(styles.cardsList, 'list-reset')}>
               {history
@@ -78,10 +80,10 @@ export const SearchDropdownContent = (props) => {
                   <li key={`history-city_${historyElement.city.id}`}>
                     <WeatherCard
                       className={styles.weatherCard}
-                      cityAndWeatherInfo={historyElement}
+                      weatherData={historyElement}
                       onClick={onSelectResult}
                       isFavorite={getIsCityFavorite(
-                        historyElement.city.name,
+                        historyElement?.city?.name,
                         favorites,
                       )}
                       isFavoriteBtnDisabled={
@@ -136,6 +138,11 @@ export const SearchDropdownContent = (props) => {
           </ul>
         );
       }
+      break;
+
+    case SEARCH_STATUSES.error:
+      title = 'Упс! Произошла ошибка';
+      content = <Error message={null} className={styles.error} />;
       break;
 
     case SEARCH_STATUSES.notFound:

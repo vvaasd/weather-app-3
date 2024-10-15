@@ -1,7 +1,6 @@
 export * from './cn';
 export * from './getPressureType';
 export * from './getWindDirection';
-export * from './checkCity';
 export * from './mapForecastData';
 export * from './replaceSpacesAndDashes';
 export * from './upperCaseFirst';

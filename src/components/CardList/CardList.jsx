@@ -1,6 +1,4 @@
-import { Card } from 'components';
-import { useContext } from 'react';
-import { WeatherContext } from 'contexts';
+import { Card, CardSkeleton } from 'components';
 import {
   cn,
   getWindDirection,
@@ -9,11 +7,10 @@ import {
   getVisibilityType,
   getTimeDifferenceInfo,
 } from 'utils';
-import { CardSkeleton } from 'components';
 import styles from './CardList.module.css';
 
-export const CardList = () => {
-  const { weatherData } = useContext(WeatherContext);
+export const CardList = (props) => {
+  const { weatherData } = props;
 
   const currentWeather = weatherData?.weather?.now || null;
 
@@ -33,7 +30,6 @@ export const CardList = () => {
     getConvertedPressure(currentWeather.pressure),
   );
   const pressureDescription = getPressureType(currentWeather.pressure);
-
   const pressurePbValue = convertedPressureValue - 700;
 
   const convertedVisibility = Math.round(currentWeather.visibility / 1000);
@@ -44,6 +40,7 @@ export const CardList = () => {
     currentWeather.sunriseMs,
     currentWeather.timezoneMs,
   );
+
   const [sunsetTimeStr, sunsetDescription] = getTimeDifferenceInfo(
     currentWeather.sunsetMs,
     currentWeather.timezoneMs,

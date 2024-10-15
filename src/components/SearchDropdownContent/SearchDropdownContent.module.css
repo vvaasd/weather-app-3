@@ -73,7 +73,8 @@
   gap: 12px;
 }
 
-.weatherCard {
+.weatherCard,
+.error {
   margin-left: 16px;
 }
 
@@ -183,7 +184,8 @@
     gap: 8px;
   }
 
-  .weatherCard {
+  .weatherCard,
+  .error {
     margin-left: 12px;
   }
 

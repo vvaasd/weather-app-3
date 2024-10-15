@@ -1,33 +1,32 @@
 import { useState, useRef, useEffect, useContext } from 'react';
-import { Button, Icon, SliderCardSkeleton } from 'components';
+import { Button, Icon, SliderCardSkeleton, Error } from 'components';
 import { useElementWidth } from 'hooks';
 import { THROTTLE_INTERVAL, IMAGE_NAMES } from 'constants';
-import { WeatherContext } from 'contexts';
+import { WeatherContext } from 'context';
 import { cn } from 'utils';
 import styles from './SliderContent.module.css';
 
 export const SliderContent = (props) => {
   const { activeSlider } = props;
 
-  const { weatherData } = useContext(WeatherContext);
+  const { weatherData, isWeatherDataFailed } = useContext(WeatherContext);
 
-  const forecast = weatherData?.weather?.forecast || null;
-
-  const sliderData = forecast ? forecast[activeSlider] : null;
-
-  const [translateX, setTranslateX] = useState(0);
-  const [stepValue, setStepValue] = useState(0);
   const sliderRef = useRef(null);
   const sliderContentRef = useRef(null);
   const cardsRefs = useRef([]);
-
+  const [translateX, setTranslateX] = useState(0);
+  const [stepValue, setStepValue] = useState(0);
   const sliderWidth = useElementWidth(sliderRef, THROTTLE_INTERVAL);
   const sliderContentWidth = useElementWidth(
     sliderContentRef,
     THROTTLE_INTERVAL,
   );
+
   const endTranslate = sliderWidth - sliderContentWidth;
   const accuracy = 10; //карточки могут отличаться на пару пикселей друг от друга, это значение есть погрешность для нормального свайпа последней карточки
+
+  const forecast = weatherData?.weather?.forecast || null;
+  const sliderData = forecast ? forecast[activeSlider] : null;
 
   const translateToStart = () => {
     setTranslateX(0);
@@ -36,7 +35,7 @@ export const SliderContent = (props) => {
   const updateStepValue = () => {
     translateToStart();
     if (cardsRefs.current.length > 0) {
-      setStepValue(cardsRefs.current[0].clientWidth);
+      setStepValue(cardsRefs.current[0]?.clientWidth);
     }
   };
 
@@ -56,6 +55,10 @@ export const SliderContent = (props) => {
     updateStepValue();
     // eslint-disable-next-line
   }, [activeSlider, weatherData, sliderWidth, sliderContentWidth]);
+
+  if (isWeatherDataFailed) {
+    return <Error message={null} subMessage={null} className={styles.error} />;
+  }
 
   return (
     <div className={styles.wrapper}>

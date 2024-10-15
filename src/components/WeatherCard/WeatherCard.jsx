@@ -6,7 +6,7 @@ import styles from './WeatherCard.module.css';
 
 export const WeatherCard = (props) => {
   const {
-    cityAndWeatherInfo,
+    weatherData,
     onClick,
     isFavorite,
     onClickFavorite,
@@ -14,13 +14,18 @@ export const WeatherCard = (props) => {
     className,
   } = props;
 
-  if (!cityAndWeatherInfo.weather) {
-    return <WeatherCardSkeleton className={className} />;
+  if (weatherData?.isError || !weatherData?.weather) {
+    return (
+      <WeatherCardSkeleton
+        className={className}
+        isError={weatherData?.isError}
+      />
+    );
   }
 
   const dateByTimezone = DateService.getTimeByTimezone(
     new Date(),
-    cityAndWeatherInfo.weather.now.timezoneMs,
+    weatherData.weather.now.timezoneMs,
   );
   const timeText = DateService.getFormattedShortTime(dateByTimezone);
 
@@ -30,19 +35,19 @@ export const WeatherCard = (props) => {
         type="button"
         className={cn(styles.btn, 'btn-reset')}
         onClick={() => {
-          onClick(cityAndWeatherInfo);
+          onClick(weatherData);
         }}
       >
         <span className={styles.block}>
-          <span className={styles.title}>{cityAndWeatherInfo.city.name}</span>
+          <span className={styles.title}>{weatherData.city.name}</span>
           <span className={styles.title}>
-            {cityAndWeatherInfo.weather.now.temperature}°
+            {weatherData.weather.now.temperature}°
           </span>
         </span>
         <span className={styles.block}>
           <span className={styles.text}>{timeText}</span>
           <span className={styles.text}>
-            {upperCaseFirst(cityAndWeatherInfo.weather.now.weatherType)}
+            {upperCaseFirst(weatherData.weather.now.weatherType)}
           </span>
         </span>
       </button>
@@ -50,7 +55,7 @@ export const WeatherCard = (props) => {
         <button
           type="button"
           onClick={() => {
-            onClickFavorite(cityAndWeatherInfo);
+            onClickFavorite(weatherData);
           }}
           className={cn(styles.likeBtn, 'btn-reset')}
           disabled={isFavoriteBtnDisabled && !isFavorite}

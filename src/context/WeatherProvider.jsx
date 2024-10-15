@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
-import { WeatherContext } from 'contexts';
-import { ApiService, StorageService } from 'services';
 import { MAX_FAVORITE_CITIES, LS_KEYS } from 'constants';
+import { WeatherContext } from 'context';
+import { ApiService, StorageService } from 'services';
 
 const DEFAULT_CITY_NAME = 'Москва';
 const MAX_HISTORY_LENGTH = 5;
 
 export const WeatherContextProvider = ({ children }) => {
   const [weatherData, setWeatherData] = useState(null);
-  // const [currentCity, setCurrentCity] = useState(null);
-  // const [currentWeather, setCurrentWeather] = useState(null);
-  // const [forecast, setForecast] = useState(null);
+  const [isWeatherDataFailed, setIsWeatherDataFailed] = useState(null);
   const [history, setHistory] = useState(
     StorageService.get(LS_KEYS.citiesHistory) || [],
   );
@@ -18,17 +16,17 @@ export const WeatherContextProvider = ({ children }) => {
     StorageService.get(LS_KEYS.favoriteCities) || [],
   );
 
-  const onChangeFavorites = (cityAndWeatherInfo) => {
+  const onChangeFavorites = (weatherData) => {
     const newFavorites = [...favorites];
 
     const cityIndex = newFavorites.findIndex(
-      (favorite) => favorite.city.name === cityAndWeatherInfo.city.name,
+      (favorite) => favorite.city.name === weatherData.city.name,
     );
 
     if (cityIndex !== -1) {
       newFavorites.splice(cityIndex, 1);
     } else if (newFavorites.length < MAX_FAVORITE_CITIES) {
-      newFavorites.push(cityAndWeatherInfo);
+      newFavorites.push(weatherData);
     } else {
       return;
     }
@@ -41,12 +39,11 @@ export const WeatherContextProvider = ({ children }) => {
     setFavorites(newFavorites);
   };
 
-  const onChangeHistory = (cityAndWeatherInfo) => {
+  const onChangeHistory = (weatherData) => {
     const newHistory = [...history];
 
     const cityIndex = newHistory.findIndex(
-      (historyElement) =>
-        historyElement.city.name === cityAndWeatherInfo.city.name,
+      (historyElement) => historyElement.city.name === weatherData.city.name,
     );
 
     if (cityIndex !== -1) {
@@ -54,7 +51,7 @@ export const WeatherContextProvider = ({ children }) => {
     } else if (newHistory.length >= MAX_HISTORY_LENGTH) {
       newHistory.shift();
     }
-    newHistory.push(cityAndWeatherInfo);
+    newHistory.push(weatherData);
 
     const newHistoryWithoutWeather = newHistory.map((favorite) => ({
       city: favorite.city,
@@ -71,11 +68,13 @@ export const WeatherContextProvider = ({ children }) => {
 
   const fetchAndSetWeatherData = async (cityInfo) => {
     try {
-      const { city, weather } = await ApiService.getWeatherData(cityInfo);
+      const newWeatherData = await ApiService.getWeatherData(cityInfo);
 
-      setWeatherData({ city, weather });
+      setWeatherData(newWeatherData);
+      setIsWeatherDataFailed(false);
     } catch (error) {
       console.log(error);
+      setIsWeatherDataFailed(true);
     }
   };
 
@@ -119,6 +118,8 @@ export const WeatherContextProvider = ({ children }) => {
       value={{
         weatherData,
         setWeatherData,
+        isWeatherDataFailed,
+        setIsWeatherDataFailed,
         favorites,
         onChangeFavorites,
         history,

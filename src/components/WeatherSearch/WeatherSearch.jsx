@@ -4,15 +4,20 @@ import { getIsInputValueValid } from 'utils';
 import { useDebounce, useOutsideInteraction } from 'hooks';
 import { SEARCH_STATUSES } from 'constants';
 import { ApiService } from 'services';
-import { ApplicationContext, WeatherContext } from 'contexts';
+import { BlurContext, WeatherContext } from 'context';
 import styles from './WeatherSearch.module.css';
 
 const MIN_SYMBOLS_TO_SEARCH = 3;
 
 export const WeatherSearch = () => {
-  const { highlightHeader, unhighlightHeader } = useContext(ApplicationContext);
-  const { setWeatherData, history, onChangeHistory, onClearHistory } =
-    useContext(WeatherContext);
+  const { highlightHeader, unhighlightHeader } = useContext(BlurContext);
+  const {
+    setWeatherData,
+    setIsWeatherDataFailed,
+    history,
+    onChangeHistory,
+    onClearHistory,
+  } = useContext(WeatherContext);
 
   const wrapperRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
@@ -43,56 +48,64 @@ export const WeatherSearch = () => {
   };
 
   const onDropdownClose = () => {
-    // setSearchStatus(SEARCH_STATUSES.history);
     setIsDropdownOpen(false);
     unhighlightHeader();
   };
 
   const onSelectQueryCity = async (cityInfo) => {
-    if (queryCities.length === 0) {
-      setSearchStatus(SEARCH_STATUSES.notFound);
-      return;
-    }
-
     setSearchStatus(SEARCH_STATUSES.loadingResult);
     try {
-      const { city, weather } = await ApiService.getWeatherData(cityInfo);
+      const newWeatherData = await ApiService.getWeatherData(cityInfo);
 
-      foundResult.current = { city, weather };
+      foundResult.current = newWeatherData;
+
       setQueryCities([]);
       setSearchStatus(SEARCH_STATUSES.success);
+      setIsWeatherDataFailed(false);
     } catch (error) {
       console.log(error);
-      setSearchStatus(SEARCH_STATUSES.notFound);
+      setSearchStatus(SEARCH_STATUSES.error);
+      setIsWeatherDataFailed(true);
     }
   };
 
-  const onSelectResult = (cityAndWeatherInfo) => {
-    setWeatherData(cityAndWeatherInfo);
-    onChangeHistory(cityAndWeatherInfo);
+  const onSelectResult = (weatherData) => {
+    setWeatherData(weatherData);
+    onChangeHistory(weatherData);
     setInputValue('');
     onDropdownClose();
   };
 
   useOutsideInteraction(wrapperRef, onDropdownClose);
 
+  const fetchAndSetQueryCities = async (cityName) => {
+    if (!cityName) {
+      return;
+    }
+
+    setSearchStatus(SEARCH_STATUSES.loader);
+    try {
+      const citiesInfo = await ApiService.getCityInfo(cityName, {
+        getArray: true,
+      });
+
+      setQueryCities(citiesInfo);
+      setSearchStatus(SEARCH_STATUSES.history);
+    } catch (error) {
+      console.log(error);
+      setSearchStatus(SEARCH_STATUSES.notFound);
+      setQueryCities([]);
+    }
+  };
+
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    fetchAndSetQueryCities(inputValue);
+  };
+
   useEffect(() => {
     if (debouncedInputValue.length >= MIN_SYMBOLS_TO_SEARCH) {
-      ApiService.getCityInfo(inputValue, {
-        getArray: true,
-      })
-        .then((citiesInfo) => {
-          setQueryCities(citiesInfo);
-          setSearchStatus(SEARCH_STATUSES.history);
-        })
-        .catch((error) => {
-          setSearchStatus(SEARCH_STATUSES.notFound);
-          setQueryCities([]);
-          console.log(error);
-        });
-    } else {
-      setSearchStatus(SEARCH_STATUSES.history);
-      setQueryCities([]);
+      fetchAndSetQueryCities(inputValue);
     }
 
     // eslint-disable-next-line
@@ -102,9 +115,7 @@ export const WeatherSearch = () => {
     <div className={styles.wrapper} ref={wrapperRef}>
       <Input
         value={inputValue}
-        onSubmit={(event) => {
-          event.preventDefault();
-        }}
+        onSubmit={onFormSubmit}
         onFocus={onDropdownOpen}
         onChange={(event) => {
           onInputChange(event.target.value);
