@@ -1,6 +1,6 @@
 .wrapper {
   padding: 32px;
-  color: var(--light-filled-100);
+  color: var(--filled-light-100-dark-900);
   text-align: center;
 }
 
@@ -11,7 +11,7 @@
 }
 
 .link {
-  color: var(--light-filled-100);
+  color: inherit;
   text-underline-offset: 3px;
 }
 

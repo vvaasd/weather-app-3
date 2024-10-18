@@ -10,12 +10,12 @@ export const App = () => {
 
   const highlightHeader = () => {
     contentToBlurRef.current.classList.add('blur');
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflowY = 'hidden';
   };
 
   const unhighlightHeader = () => {
     contentToBlurRef.current.classList.remove('blur');
-    document.body.style.overflow = 'auto';
+    document.body.style.overflowY = 'auto';
   };
 
   return (

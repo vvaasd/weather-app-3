@@ -13,3 +13,4 @@ export * from './throttle';
 export * from './getIsCityFavorite';
 export * from './mapCitiesInfo';
 export * from './splitStringByStart';
+export * from './getTheme';

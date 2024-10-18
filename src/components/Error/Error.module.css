@@ -22,7 +22,7 @@
 }
 
 .message {
-  color: var(--light-filled-900);
+  color: var(--filled-900);
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
@@ -30,18 +30,18 @@
 }
 
 .message.light {
-  color: var(--light-filled-100);
+  color: var(--filled-light-100-dark-900);
 }
 
 .subMessage {
-  color: var(--light-filled-700);
+  color: var(--filled-700);
   font-size: 20px;
   line-height: 24px;
   margin-block: 0;
 }
 
 .subMessage.light {
-  color: var(--light-filled-200);
+  color: var(--filled-light-200-dark-700);
 }
 
 .btn {

@@ -6,6 +6,8 @@ export const IMAGE_NAMES = {
   arrowLeft: 'arrowLeft',
   trashBin: 'trashBin',
   heart: 'heart',
+  day: 'day',
+  night: 'night',
 
   humidity: 'humidity',
   pressure: 'pressure',

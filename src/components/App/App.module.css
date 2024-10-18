@@ -8,6 +8,7 @@
   min-height: 100vh;
   padding: 32px;
 
+  background-color: var(--filled-light-700-dark-300);
   background-image: url('/public/images/background.jpg');
   background-attachment: fixed;
   background-position: center;
@@ -17,6 +18,7 @@
 .container {
   backdrop-filter: blur(var(--std-blur));
   border-radius: var(--std-border-radius);
+  background-color: var(--tone-600);
 }
 
 .main {

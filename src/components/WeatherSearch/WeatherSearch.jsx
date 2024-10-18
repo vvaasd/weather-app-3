@@ -1,6 +1,6 @@
 import { useRef, useState, useContext, useEffect } from 'react';
 import { Dropdown, Input, SearchDropdownContent } from 'components';
-import { getIsInputValueValid } from 'utils';
+import { cn, getIsInputValueValid } from 'utils';
 import { useDebounce, useOutsideInteraction } from 'hooks';
 import { SEARCH_STATUSES } from 'constants';
 import { ApiService } from 'services';
@@ -9,7 +9,9 @@ import styles from './WeatherSearch.module.css';
 
 const MIN_SYMBOLS_TO_SEARCH = 3;
 
-export const WeatherSearch = () => {
+export const WeatherSearch = (props) => {
+  const { isDropdownOpen, setIsDropdownOpen, className } = props;
+
   const { highlightHeader, unhighlightHeader } = useContext(BlurContext);
   const {
     setWeatherData,
@@ -21,7 +23,6 @@ export const WeatherSearch = () => {
 
   const wrapperRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [searchStatus, setSearchStatus] = useState(SEARCH_STATUSES.history);
   const [queryCities, setQueryCities] = useState([]);
   const foundResult = useRef({});
@@ -107,12 +108,11 @@ export const WeatherSearch = () => {
     if (debouncedInputValue.length >= MIN_SYMBOLS_TO_SEARCH) {
       fetchAndSetQueryCities(inputValue);
     }
-
     // eslint-disable-next-line
   }, [debouncedInputValue]);
 
   return (
-    <div className={styles.wrapper} ref={wrapperRef}>
+    <div className={cn(styles.wrapper, className)} ref={wrapperRef}>
       <Input
         value={inputValue}
         onSubmit={onFormSubmit}

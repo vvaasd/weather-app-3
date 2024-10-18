@@ -1,22 +1,65 @@
 :root {
-  --light-filled-100: #f5f4f4;
-  --light-filled-200: #dadada;
-  --light-filled-300: #c0c0c0;
-  --light-filled-400: #a6a6a6;
-  --light-filled-500: #8a8a8a;
-  --light-filled-600: #707070;
-  --light-filled-700: #545454;
-  --light-filled-800: #393939;
-  --light-filled-900: #202020;
-  --light-tone-100: rgba(245, 244, 244, 0.4);
-  --light-tone-200: rgba(218, 218, 218, 0.4);
-  --light-tone-500: rgba(138, 138, 138, 0.4);
-  --light-tone-600: rgba(112, 112, 112, 0.1);
-  --progress-position: 0%;
-  --std-border-radius: 8px;
-  --std-blur: 25px;
   --font-family: raleway, sans-serif;
   --transition-fast: 0.15s ease;
   --transition-medium: 0.3s ease;
   --transition-long: 0.5s ease;
+  --std-blur: 25px;
+  --std-border-radius: 8px;
+  --progress-position: 0%;
+}
+
+:root[data-theme='light'] {
+  --filled-100: #f5f4f4;
+  --filled-200: #dadada;
+  --filled-300: #c0c0c0;
+  --filled-400: #a6a6a6;
+  --filled-500: #584e4e;
+  --filled-600: #707070;
+  --filled-700: #545454;
+  --filled-800: #393939;
+  --filled-900: #202020;
+  --tone-100: rgba(245, 244, 244, 0.4);
+  --tone-200: rgba(218, 218, 218, 0.4);
+  --tone-500: rgba(138, 138, 138, 0.4);
+  --tone-600: rgba(112, 112, 112, 0.1);
+
+  --filled-light-100-dark-700: #f5f4f4;
+  --filled-light-100-dark-900: #f5f4f4;
+  --filled-light-200-dark-700: #dadada;
+  --filled-light-400-dark-700: #a6a6a6;
+  --filled-light-500-dark-400: #8a8a8a;
+  --filled-light-700-dark-300: #545454;
+  --filled-light-900-dark-700: #202020;
+  --tone-light-500-dark-400: rgba(138, 138, 138, 0.4);
+  --tone-light-600-dark-500: rgba(112, 112, 112, 0.1);
+
+  --std-box-shadow: 2px 0 6px 0 rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme='dark'] {
+  --filled-100: #1e1e1e;
+  --filled-200: #262626;
+  --filled-300: #393939;
+  --filled-400: #4e4e4e;
+  --filled-600: #797979;
+  --filled-700: #b7b6b6;
+  --filled-800: #dadada;
+  --filled-900: #f5f4f4;
+  --tone-100: rgba(30, 30, 30, 0.6);
+  --tone-200: rgba(38, 38, 38, 0.6);
+  --tone-400: rgba(78, 78, 78, 0.6);
+  --tone-500: rgba(85, 85, 85, 0.1);
+  --tone-600: rgba(121, 121, 121, 0.6);
+
+  --filled-light-100-dark-700: #b7b6b6;
+  --filled-light-100-dark-900: #f5f4f4;
+  --filled-light-200-dark-700: #b7b6b6;
+  --filled-light-400-dark-700: #b7b6b6;
+  --filled-light-500-dark-400: #4e4e4e;
+  --filled-light-700-dark-300: #393939;
+  --filled-light-900-dark-700: #b7b6b6;
+  --tone-light-500-dark-400: rgba(78, 78, 78, 0.6);
+  --tone-light-600-dark-500: rgba(85, 85, 85, 0.1);
+
+  --std-box-shadow: -4px 0 8px 0 rgba(0, 0, 0, 0.25);
 }

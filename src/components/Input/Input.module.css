@@ -7,7 +7,7 @@
   max-width: 100%;
   padding: 0;
 
-  background-color: var(--light-tone-100);
+  background-color: var(--tone-100);
   border-radius: var(--std-border-radius);
 }
 
@@ -18,7 +18,7 @@
   font-family: var(--font-family);
   font-size: 20px;
   line-height: 24px;
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 
   background: none;
   border: none;
@@ -36,15 +36,23 @@
   margin-right: 16px;
 }
 
+.icon path {
+  stroke: var(--filled-700);
+}
+
+.close path {
+  fill: var(--filled-700);
+}
+
 @media (hover: hover) {
   .wrapper:hover {
-    background-color: var(--light-filled-200);
+    background-color: var(--filled-200);
   }
 }
 
 .wrapper:focus-within,
 .active {
-  background-color: var(--light-filled-200);
+  background-color: var(--filled-200);
 }
 
 @media screen and (max-width: 767px) {

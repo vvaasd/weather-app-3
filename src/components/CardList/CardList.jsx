@@ -9,6 +9,8 @@ import {
 } from 'utils';
 import styles from './CardList.module.css';
 
+const BASE_WIND_ICON_ROTATION = 45;
+
 export const CardList = (props) => {
   const { weatherData } = props;
 
@@ -108,7 +110,9 @@ export const CardList = (props) => {
           iconName={'wind'}
           value={Math.round(currentWeather.wind.speed)}
           units={'м/с'}
-          imgRotationDeg={currentWeather.wind.deg - 45 + 180}
+          imgRotationDeg={
+            currentWeather.wind.deg + 180 + BASE_WIND_ICON_ROTATION
+          }
           description={windDescription}
         />
       </li>

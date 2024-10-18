@@ -6,8 +6,7 @@
 
   width: 100%;
   padding: 8px;
-
-  color: var(--light-filled-100);
+  color: var(--filled-light-100-dark-900);
 }
 
 .dateTimeCity {
@@ -59,12 +58,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
 }
 
 .weatherTypeIcon {
   width: 24px;
   height: 24px;
-  margin-right: 8px;
 }
 
 .temperatureFeels {
@@ -117,8 +116,8 @@
     gap: 6px;
   }
 
-  .weatherTypeIcon {
-    margin-right: 6px;
+  .description {
+    gap: 6px;
   }
 }
 
@@ -157,10 +156,13 @@
     line-height: 16px;
   }
 
+  .description {
+    gap: 4px;
+  }
+
   .weatherTypeIcon {
     width: 16px;
     height: 16px;
-    margin-right: 4px;
   }
 
   .temperatureFeels {

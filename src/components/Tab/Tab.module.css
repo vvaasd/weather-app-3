@@ -2,7 +2,7 @@
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
-  color: var(--light-filled-400);
+  color: var(--filled-light-400-dark-700);
 }
 
 .btn {
@@ -11,10 +11,10 @@
   margin-top: 4px;
 
   font-weight: bold;
-  color: var(--light-filled-400);
 
   background: none;
   border: 0;
+  color: var(--filled-light-400-dark-700);
 }
 
 .btn::after {
@@ -28,7 +28,7 @@
   width: 0;
   height: 2px;
 
-  background-color: var(--light-filled-100);
+  background-color: var(--filled-light-100-dark-900);
   border-radius: 4px;
 
   transition: transform var(--transition-medium), width var(--transition-medium);
@@ -40,7 +40,7 @@
 }
 
 .active .btnText {
-  color: var(--light-filled-100);
+  color: var(--filled-light-100-dark-900);
 }
 
 @media screen and (max-width: 767px) {

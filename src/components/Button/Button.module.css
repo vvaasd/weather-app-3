@@ -7,16 +7,16 @@
 
   font-size: 20px;
   line-height: 24px;
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 
-  background-color: var(--light-tone-100);
+  background-color: var(--tone-100);
   border: none;
   border-radius: var(--std-border-radius);
 }
 
 @media (hover: hover) {
   .button:not(:disabled):hover {
-    background-color: var(--light-filled-200);
+    background-color: var(--filled-200);
   }
 }
 

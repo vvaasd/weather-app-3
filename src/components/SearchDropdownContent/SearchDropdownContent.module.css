@@ -5,14 +5,11 @@
   gap: 16px;
   overflow-y: scroll;
   padding-block: 6px;
-}
-
-.wrapper {
   max-height: calc(100dvh - (32px * 2) - 16px - 24px - 12px - 48px - 16px);
-  overflow-y: scroll;
 }
 
 .wrapper::-webkit-scrollbar {
+  background-color: transparent;
   width: 16px;
 }
 
@@ -21,7 +18,7 @@
 }
 
 .wrapper::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 10px 10px var(--light-filled-700);
+  box-shadow: inset 0 0 10px 10px var(--filled-700);
   border: solid 6px transparent;
   border-radius: 16px;
 }
@@ -41,7 +38,7 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 32px;
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 }
 
 .clearHistoryBtn {
@@ -53,18 +50,16 @@
   border: none;
 }
 
-.clearHistoryIcon {
-  width: 100%;
-  height: 100%;
-  color: var(--light-filled-700);
+.clearHistoryIcon path {
+  stroke: var(--filled-700);
 }
 
-.clearHistoryBtn:hover .clearHistoryIcon {
-  color: var(--light-filled-900);
+.clearHistoryBtn:hover .clearHistoryIcon path {
+  stroke: var(--filled-900);
 }
 
-.clearHistoryBtn:disabled .clearHistoryIcon {
-  color: var(--light-filled-500);
+.clearHistoryBtn:disabled .clearHistoryIcon path {
+  stroke: var(--filled-light-500-dark-400);
 }
 
 .cardsList {
@@ -88,7 +83,7 @@
   width: 100%;
   padding: 12px 16px;
 
-  color: var(--light-filled-900);
+  color: var(--filled-900);
   text-align: left;
 
   background: none;
@@ -97,13 +92,13 @@
 
 @media (hover: hover) {
   .queryCityBtn:hover {
-    background-color: var(--light-filled-200);
+    background-color: var(--filled-200);
   }
 }
 
 @media (hover: none) {
   .queryCityBtn:active {
-    background-color: var(--light-filled-200);
+    background-color: var(--filled-200);
   }
 }
 
@@ -111,15 +106,15 @@
   margin: 0;
   font-size: 20px;
   line-height: 24px;
-  color: var(--light-filled-700);
+  color: var(--filled-700);
 }
 
 .text.highlighted {
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 }
 
 .text.unhighlighted {
-  color: var(--light-filled-600);
+  color: var(--filled-600);
 }
 
 .errorText {
@@ -140,9 +135,6 @@
 @media (max-width: 767px) {
   .wrapper {
     gap: 12px;
-  }
-
-  .wrapper {
     max-height: calc(100dvh - (16px * 2) - 12px - 14px - 32px - 16px);
     padding-block: 5px;
   }
@@ -156,7 +148,7 @@
   }
 
   .wrapper::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 10px 10px var(--light-filled-700);
+    box-shadow: inset 0 0 10px 10px var(--filled-700);
     border: solid 5px transparent;
     border-radius: 16px;
   }

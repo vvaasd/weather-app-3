@@ -1,23 +1,22 @@
 .link {
-  height: 48px;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 48px;
+  text-decoration: none;
+  letter-spacing: -1px;
 }
 
-.logo {
-  content: url('/public/images/logo/logo.svg');
+.startText {
+  color: var(--filled-light-100-dark-900);
 }
 
-@media screen and (max-width: 1023px) {
-  .logo {
-    content: url('/public/images/logo/logoTablet.svg');
-  }
+.endText {
+  color: var(--filled-light-900-dark-700);
 }
 
 @media screen and (max-width: 767px) {
-  .logo {
-    content: url('/public/images/logo/logoMobile.svg');
-  }
-
   .link {
-    height: 32px;
+    font-size: 20px;
+    line-height: 32px;
   }
 }

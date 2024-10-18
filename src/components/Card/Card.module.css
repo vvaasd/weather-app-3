@@ -8,7 +8,7 @@
   height: 100%;
   padding: 16px;
 
-  background-color: var(--light-tone-100);
+  background-color: var(--tone-100);
   border-radius: var(--std-border-radius);
 }
 
@@ -16,13 +16,13 @@
   margin-block: 0;
   font-size: 16px;
   line-height: 20px;
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 }
 
 .value {
   font-size: 32px;
   line-height: 1;
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 }
 
 .bottom {
@@ -37,7 +37,7 @@
 
   font-size: 12px;
   line-height: 16px;
-  color: var(--light-filled-800);
+  color: var(--filled-800);
   text-align: center;
   word-break: break-all;
 }
@@ -47,9 +47,17 @@
   justify-content: space-between;
 }
 
+.intervalValue {
+  color: var(--filled-800);
+}
+
 .icon {
   width: 32px;
   height: 32px;
+}
+
+.icon > g > rect {
+  fill: var(--filled-light-900-dark-700);
 }
 
 .titleSkeleton {
@@ -92,7 +100,7 @@
     margin-bottom: 6px;
     border-radius: 3px;
     mask: radial-gradient(circle at 5%, transparent 5px, #ffffff 0),
-      radial-gradient(circle at 5%, var(--light-filled-100) 3px, transparent 0);
+      radial-gradient(circle at 5%, var(--filled-100) 3px, transparent 0);
   }
 
   .progress div::after {

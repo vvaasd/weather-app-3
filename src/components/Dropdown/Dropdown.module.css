@@ -15,7 +15,7 @@
 
   visibility: hidden;
   opacity: 0;
-  background-color: var(--light-tone-100);
+  background-color: var(--tone-100);
   border-radius: var(--std-border-radius);
 }
 

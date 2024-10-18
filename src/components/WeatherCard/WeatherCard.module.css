@@ -10,7 +10,7 @@
 
 .wrapper.skeleton {
   background: none;
-  background-color: var(--light-tone-200);
+  background-color: var(--tone-200);
 }
 
 .btn {
@@ -21,7 +21,7 @@
   width: 100%;
   padding: 16px;
 
-  color: var(--light-filled-100);
+  color: var(--filled-light-100-dark-900);
 }
 
 .error {
@@ -36,6 +36,7 @@
 }
 
 .title {
+  text-align: left;
   font-weight: 700;
   font-size: 24px;
   line-height: 32px;
@@ -53,7 +54,7 @@
   border-radius: var(--std-border-radius);
 
   backdrop-filter: blur(var(--std-blur));
-  background-color: var(--light-tone-600);
+  background-color: var(--tone-600);
 }
 
 .likeBtn {
@@ -67,23 +68,23 @@
 }
 
 .likeIcon {
-  fill: var(--light-filled-100);
-  stroke: var(--light-filled-100);
+  fill: var(--filled-light-100-dark-900);
+  stroke: var(--filled-light-100-dark-900);
 }
 
 .likeBtn:disabled .likeIcon {
-  stroke: var(--light-tone-500);
+  stroke: var(--tone-light-500-dark-400);
 }
 
 @media (hover: hover) {
   .likeBtn:not(:disabled):hover .likeIcon {
-    fill: var(--light-filled-100);
+    fill: var(--filled-light-100-dark-900);
   }
 }
 
 @media (hover: none) {
   .likeBtn:not(:disabled):active .likeIcon {
-    fill: var(--light-filled-100);
+    fill: var(--filled-light-100-dark-900);
   }
 }
 

@@ -72,7 +72,6 @@ export const SearchDropdownContent = (props) => {
             </p>
           );
         } else {
-          console.log(history);
           content = (
             <ul className={cn(styles.cardsList, 'list-reset')}>
               {history
@@ -175,7 +174,7 @@ export const SearchDropdownContent = (props) => {
             >
               <Icon
                 name={IMAGE_NAMES.trashBin}
-                className={cn(styles.clearHistoryIcon, 'colored')}
+                className={styles.clearHistoryIcon}
               />
             </button>
           )}

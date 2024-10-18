@@ -27,7 +27,7 @@ export const Input = (props) => {
       >
         <Icon
           name={value ? IMAGE_NAMES.close : IMAGE_NAMES.search}
-          className={styles.icon}
+          className={cn(styles.icon, { [styles.close]: value })}
         />
       </button>
     </form>

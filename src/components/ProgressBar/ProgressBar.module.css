@@ -9,7 +9,9 @@
   width: 100%;
   height: 8px;
 
-  background-color: var(--light-tone-200);
+  --tone-500: rgba(138, 138, 138, 0.4);
+
+  background-color: var(--tone-200);
   border-radius: var(--std-border-radius);
 
   mask: radial-gradient(
@@ -20,14 +22,23 @@
   );
 }
 
-.barTumbler {
-  z-index: 10;
+.barStripe.gradient {
+  transition: background-image var(--transition-long);
 
+  background-image: radial-gradient(
+    50% 9453.13% at 50% 50%,
+    var(--tone-500) 0%,
+    var(--tone-500) 45.12%,
+    var(--filled-200) 100%,
+    var(--filled-200) 100%
+  );
+}
+
+.barTumbler {
   width: 8px;
   height: 8px;
   margin-left: calc(var(--progress-position) - 4px);
-
-  background-color: var(--light-filled-100);
+  background-color: var(--filled-light-100-dark-900);
   border-radius: 50%;
 }
 

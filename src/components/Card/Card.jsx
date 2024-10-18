@@ -24,7 +24,7 @@ export const Card = (props) => {
     <article className={styles.card} {...otherProps}>
       <h2 className={styles.title}>{title}</h2>
       <Icon
-        className={styles.icon}
+        className={cn(styles.icon)}
         name={IMAGE_NAMES[iconName]}
         style={{
           transform: imgRotationDeg && `rotate(${imgRotationDeg}deg`,
@@ -51,8 +51,8 @@ export const Card = (props) => {
         >
           {typeof min === 'number' && typeof max === 'number' ? (
             <>
-              <span>0%</span>
-              <span>100%</span>
+              <span className={styles.intervalValue}>{min}%</span>
+              <span className={styles.intervalValue}>{max}%</span>
             </>
           ) : (
             description

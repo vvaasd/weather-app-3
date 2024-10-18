@@ -1,0 +1,57 @@
+.wrapper {
+  display: flex;
+  background-color: var(--tone-100);
+  border-radius: var(--std-border-radius);
+}
+
+.btn {
+  padding: 12px;
+  height: 48px;
+}
+
+.btn.selected {
+  padding: 8px 12px;
+  box-shadow: var(--std-box-shadow);
+  background-color: var(--tone-light-600-dark-500);
+  border-radius: var(--std-border-radius);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.btn.selected .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.dayIcon g rect {
+  fill: var(--filled-light-100-dark-700);
+}
+
+.btn.selected .nightIcon g rect {
+  fill: var(--filled-light-100-dark-900);
+}
+
+@media (max-width: 767px) {
+  .btn {
+    height: 32px;
+
+    padding: 8px;
+  }
+
+  .btn.selected {
+    padding: 4px 8px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .btn.selected .icon {
+    width: 24px;
+    height: 24px;
+  }
+}

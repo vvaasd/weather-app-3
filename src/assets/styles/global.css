@@ -1,10 +1,10 @@
 * {
-  transition: all var(--transition-fast);
+  transition: all var(--transition-fast), color var(--transition-long),
+    background-color var(--transition-long);
 }
 
 body {
   margin: 0;
-  padding: 0;
   font-family: var(--font-family);
 }
 
@@ -24,18 +24,14 @@ body {
   filter: blur(var(--std-blur));
 }
 
-.overflow-hidden {
-  overflow: hidden;
-}
-
 .skeleton {
   position: relative;
   overflow: hidden;
-  background: var(--light-tone-100);
+  background: var(--tone-100);
   border-radius: var(--std-border-radius);
 }
 
-.skeleton::after {
+.skeleton.wrapper::after {
   content: '';
 
   position: absolute;
@@ -49,9 +45,9 @@ body {
   opacity: 0.2;
   background: linear-gradient(
     to right,
-    var(--light-tone-500) 0%,
-    var(--light-tone-200) 50%,
-    var(--light-tone-500) 100%
+    var(--tone-500) 0%,
+    var(--tone-200) 50%,
+    var(--tone-500) 100%
   );
 
   animation: skeleton 1s ease-in-out infinite;
@@ -64,21 +60,6 @@ body {
 
   100% {
     left: 100%;
-  }
-}
-
-svg.colored {
-  & *[fill],
-  & *[stroke] {
-    transition: var(--transition-fast);
-  }
-
-  & *[fill] {
-    fill: currentcolor;
-  }
-
-  & *[stroke] {
-    stroke: currentcolor;
   }
 }
 

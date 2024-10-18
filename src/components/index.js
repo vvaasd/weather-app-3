@@ -24,3 +24,4 @@ export * from './WeatherCard/WeatherCard';
 export * from './Favorites/Favorites';
 export * from './WeatherCard/WeatherCardSkeleton';
 export * from './Error/Error';
+export * from './Switch/Switch';

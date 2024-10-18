@@ -58,7 +58,7 @@
   text-align: center;
   white-space: nowrap;
 
-  background-color: var(--light-tone-200);
+  background-color: var(--tone-200);
   border-radius: var(--std-border-radius);
 }
 
@@ -67,12 +67,16 @@
   height: 32px;
 }
 
+.btnIcon path {
+  stroke: var(--filled-700);
+}
+
 .arrowRight {
   rotate: 180deg;
 }
 
 .text {
-  color: var(--light-filled-900);
+  color: var(--filled-900);
 }
 
 .textSkeleton {
