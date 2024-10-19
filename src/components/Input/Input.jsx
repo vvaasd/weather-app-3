@@ -1,10 +1,21 @@
-import { Icon } from 'components';
-import { cn } from 'utils';
+import { forwardRef, useState } from 'react';
+import { Icon, Location } from 'components';
 import { IMAGE_NAMES } from 'constants';
+import { cn } from 'utils';
 import styles from './Input.module.css';
 
-export const Input = (props) => {
-  const { onSubmit, value, onClear = () => {}, ...otherProps } = props;
+const Input = (props, ref) => {
+  const {
+    onSubmit,
+    value,
+    onClear,
+    onFocus = () => {},
+    onBlur = () => {},
+    onClickGeolocation,
+    ...otherProps
+  } = props;
+
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleBtnClick = () => {
     if (value) {
@@ -13,11 +24,25 @@ export const Input = (props) => {
   };
 
   return (
-    <form className={styles.wrapper} onSubmit={onSubmit}>
+    <form
+      className={cn(styles.wrapper, {
+        [styles.highlighted]: isFocused,
+      })}
+      onSubmit={onSubmit}
+    >
       <input
+        ref={ref}
         value={value}
         autoComplete="off"
         className={styles.input}
+        onFocus={() => {
+          onFocus();
+          setIsFocused(true);
+        }}
+        onBlur={() => {
+          onBlur();
+          setIsFocused(false);
+        }}
         {...otherProps}
       />
       <button
@@ -30,6 +55,9 @@ export const Input = (props) => {
           className={cn(styles.icon, { [styles.close]: value })}
         />
       </button>
+      <Location onClick={onClickGeolocation} />
     </form>
   );
 };
+
+export default forwardRef(Input);

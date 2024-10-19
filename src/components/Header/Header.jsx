@@ -23,7 +23,7 @@ export const Header = (props) => {
         </div>
         <Switch
           className={cn({
-            [styles.visuallyHidden]: isSearchDropdownOpen,
+            [styles.hidden]: isSearchDropdownOpen,
           })}
         />
       </div>

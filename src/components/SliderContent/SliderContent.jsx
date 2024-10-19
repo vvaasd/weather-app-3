@@ -63,7 +63,7 @@ export const SliderContent = (props) => {
   return (
     <div className={styles.wrapper}>
       <Button disabled={translateX === 0} onClick={translateLeft}>
-        <Icon name={'arrowLeft'} className={styles.btnIcon} />
+        <Icon name={IMAGE_NAMES.arrowLeft} className={styles.btnIcon} />
       </Button>
       <div
         className={cn(styles.sliderLimiter, {

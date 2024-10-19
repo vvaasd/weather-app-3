@@ -31,7 +31,7 @@ body {
   border-radius: var(--std-border-radius);
 }
 
-.skeleton.wrapper::after {
+.skeleton::after {
   content: '';
 
   position: absolute;

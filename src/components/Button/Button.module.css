@@ -9,13 +9,16 @@
   line-height: 24px;
   color: var(--filled-900);
 
-  background-color: var(--tone-100);
   border: none;
   border-radius: var(--std-border-radius);
 }
 
+.button:not(.noBackground) {
+  background-color: var(--tone-100);
+}
+
 @media (hover: hover) {
-  .button:not(:disabled):hover {
+  .button:not(:disabled, .noCursorEffects, .noBackground):hover {
     background-color: var(--filled-200);
   }
 }

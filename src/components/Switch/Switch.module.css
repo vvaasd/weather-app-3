@@ -4,6 +4,12 @@
   border-radius: var(--std-border-radius);
 }
 
+@media (hover: hover) {
+  .wrapper:hover {
+    background-color: var(--tone-light-200-filled-dark-200);
+  }
+}
+
 .btn {
   padding: 12px;
   height: 48px;

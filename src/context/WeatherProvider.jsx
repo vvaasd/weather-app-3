@@ -7,14 +7,72 @@ const DEFAULT_CITY_NAME = 'Москва';
 const MAX_HISTORY_LENGTH = 5;
 
 export const WeatherContextProvider = ({ children }) => {
-  const [weatherData, setWeatherData] = useState(null);
   const [isWeatherDataFailed, setIsWeatherDataFailed] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
+  const [geolocationWeatherData, setGeolocationWeatherData] = useState(
+    StorageService.get(LS_KEYS.storedCity) || null,
+  );
+  const [isGeolocationFailed, setIsGeolocationFailed] = useState(false);
+  const [isGeolocationLoading, setIsGeolocationLoading] = useState(false);
   const [history, setHistory] = useState(
     StorageService.get(LS_KEYS.citiesHistory) || [],
   );
   const [favorites, setFavorites] = useState(
     StorageService.get(LS_KEYS.favoriteCities) || [],
   );
+
+  const geolocate = () => {
+    setIsGeolocationLoading(true);
+    const geolocator = navigator.geolocation;
+    if (!geolocator) {
+      console.log('Геолокация не поддерживается');
+      setIsGeolocationLoading(false);
+      setIsGeolocationFailed(true);
+      return;
+    }
+
+    geolocator.getCurrentPosition(
+      (position) => {
+        const coords = {
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        };
+
+        fetchAndSetGeolocationWeatherData({ city: coords }).then(() => {});
+      },
+      (error) => {
+        console.log(error);
+        setIsGeolocationLoading(false);
+        setIsGeolocationFailed(true);
+      },
+    );
+  };
+
+  const fetchAndSetGeolocationWeatherData = async (coords) => {
+    try {
+      const newWeatherData = await ApiService.getWeatherData(coords);
+
+      setGeolocationWeatherData(newWeatherData);
+      setIsGeolocationFailed(false);
+      setIsGeolocationLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsGeolocationFailed(true);
+      setIsGeolocationLoading(false);
+    }
+  };
+
+  const fetchAndSetWeatherData = async (coords) => {
+    try {
+      const newWeatherData = await ApiService.getWeatherData(coords);
+
+      setWeatherData(newWeatherData);
+      setIsWeatherDataFailed(false);
+    } catch (error) {
+      console.log(error);
+      setIsWeatherDataFailed(true);
+    }
+  };
 
   const onChangeFavorites = (weatherData) => {
     const newFavorites = [...favorites];
@@ -66,18 +124,6 @@ export const WeatherContextProvider = ({ children }) => {
     setHistory([]);
   };
 
-  const fetchAndSetWeatherData = async (cityInfo) => {
-    try {
-      const newWeatherData = await ApiService.getWeatherData(cityInfo);
-
-      setWeatherData(newWeatherData);
-      setIsWeatherDataFailed(false);
-    } catch (error) {
-      console.log(error);
-      setIsWeatherDataFailed(true);
-    }
-  };
-
   const fetchAndSetFavorites = async (favorites) => {
     try {
       const favoritesWithWeather = await ApiService.getCitiesWeatherData(
@@ -103,7 +149,9 @@ export const WeatherContextProvider = ({ children }) => {
   };
 
   const onPageLoad = () => {
-    fetchAndSetWeatherData(DEFAULT_CITY_NAME);
+    fetchAndSetWeatherData(
+      StorageService.get(LS_KEYS.storedCity) || DEFAULT_CITY_NAME,
+    );
     fetchAndSetFavorites(favorites);
     fetchAndSetHistory(history);
   };
@@ -125,7 +173,10 @@ export const WeatherContextProvider = ({ children }) => {
         history,
         onChangeHistory,
         onClearHistory,
-        fetchAndSetWeatherData,
+        geolocationWeatherData,
+        isGeolocationFailed,
+        isGeolocationLoading,
+        geolocate,
       }}
     >
       {children}

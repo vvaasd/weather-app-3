@@ -1,28 +1,27 @@
-import {
-  replaceSpacesAndDashes,
-  mapForecastData,
-  mapCurrentWeatherData,
-  mapCitiesInfo,
-} from 'utils';
+import { mapForecastData, mapCurrentWeatherData, mapCitiesInfo } from 'utils';
+import { StringService } from 'services';
 
 const MAX_SERCH_RESULTS = 8;
 
 export class ApiService {
-  static async getCityInfo(cityName, options = { getArray: false }) {
-    const validatedCityName = replaceSpacesAndDashes(cityName);
-
+  static async getCityInfo(city, options = { getArray: false }) {
     const maxCities = options.getArray ? MAX_SERCH_RESULTS : 1;
     try {
-      const response = await fetch(
-        `https://nominatim.openstreetmap.org/search.php?q=${validatedCityName}&format=json&addressdetails=1&limit=${maxCities}&accept-language=ru`,
-      );
+      let url;
+      if (city?.city?.lat && city?.city?.lon) {
+        url = `https://nominatim.openstreetmap.org/reverse.php?lat=${city.city.lat}&lon=${city.city.lon}&zoom=10&format=json&addressdetails=1&limit=${maxCities}&accept-language=ru`;
+      } else {
+        const validatedCityName = StringService.replaceSpacesAndDashes(city);
+        url = `https://nominatim.openstreetmap.org/search.php?q=${validatedCityName}&format=json&addressdetails=1&limit=${maxCities}&accept-language=ru`;
+      }
+
+      const response = await fetch(url);
 
       if (!response.ok) {
         return Promise.reject(
           'Отсутствует связь со сторонним сервисом openstreetmap',
         );
       }
-
       const citiesData = await response.json();
       if (citiesData.length === 0) {
         return Promise.reject('Упс! Город не найден, попробуйте другой');
@@ -34,7 +33,9 @@ export class ApiService {
         return mappedData;
       }
 
-      const { name, lat, lon, place_id } = citiesData[0];
+      const cityData = Array.isArray(citiesData) ? citiesData[0] : citiesData;
+
+      const { name, lat, lon, place_id } = cityData;
       return { name, lat, lon, id: place_id };
     } catch (error) {
       return Promise.reject(error);
@@ -94,8 +95,12 @@ export class ApiService {
 
   static async getWeatherData(city) {
     try {
-      const cityInfo =
-        typeof city === 'object' ? city : await ApiService.getCityInfo(city);
+      let cityInfo = city;
+      if (typeof city !== 'object') {
+        cityInfo = await ApiService.getCityInfo(city);
+      } else if (!city?.name) {
+        cityInfo = await ApiService.getCityInfo(city);
+      }
 
       const now = await ApiService.getCurrentWeatherData(cityInfo);
       const forecast = await ApiService.getForecastData(cityInfo);

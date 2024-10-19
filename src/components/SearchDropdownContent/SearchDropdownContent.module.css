@@ -62,7 +62,7 @@
   stroke: var(--filled-light-500-dark-400);
 }
 
-.cardsList {
+.list {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -126,6 +126,13 @@
   text-align: center;
 }
 
+.confirm {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
 @media screen and (max-width: 1023px) {
   .wrapper {
     max-height: calc(100dvh - (24px * 2) - 14px - 24px - 48px - 16px);
@@ -172,7 +179,7 @@
     padding: 8px 12px;
   }
 
-  .cardsList {
+  .list {
     gap: 8px;
   }
 
@@ -196,5 +203,12 @@
 
   .loaderWrapper {
     height: 40px;
+  }
+
+  .confirm {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
   }
 }

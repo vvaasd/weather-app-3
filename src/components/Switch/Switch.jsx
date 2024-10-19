@@ -16,6 +16,7 @@ export const Switch = (props) => {
   return (
     <div className={cn(styles.wrapper, className)} {...otherProps}>
       <button
+        type="button"
         onClick={onToggleTheme}
         className={cn(styles.btn, 'btn-reset', { [styles.selected]: isLight })}
       >
@@ -25,6 +26,7 @@ export const Switch = (props) => {
         />
       </button>
       <button
+        type="button"
         onClick={onToggleTheme}
         className={cn(styles.btn, 'btn-reset', { [styles.selected]: isDark })}
       >

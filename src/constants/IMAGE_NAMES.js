@@ -8,6 +8,7 @@ export const IMAGE_NAMES = {
   heart: 'heart',
   day: 'day',
   night: 'night',
+  location: 'location',
 
   humidity: 'humidity',
   pressure: 'pressure',
@@ -15,7 +16,4 @@ export const IMAGE_NAMES = {
   sunset: 'sunset',
   wind: 'wind',
   visibility: 'visibility',
-
-  dayBrokenCloudsSvg: 'dayBrokenCloudsSvg',
-  dayFewCloudsSvg: 'dayFewCloudsSvg',
 };

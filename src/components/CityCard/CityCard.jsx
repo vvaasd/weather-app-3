@@ -1,6 +1,5 @@
 import { CityCardSkeleton } from 'components';
-import { upperCaseFirst } from 'utils';
-import { DateService } from 'services';
+import { DateService, StringService } from 'services';
 import styles from './CityCard.module.css';
 
 export const CityCard = (props) => {
@@ -18,11 +17,13 @@ export const CityCard = (props) => {
     currentWeather.timezoneMs,
   );
 
-  const dateText = upperCaseFirst(
+  const dateText = StringService.upperCaseFirst(
     DateService.getFormattedLongDate(dateByTimezone),
   );
   const timeText = DateService.getFormattedShortTime(dateByTimezone);
-  const weatherTypeText = upperCaseFirst(currentWeather.weatherType);
+  const weatherTypeText = StringService.upperCaseFirst(
+    currentWeather.weatherType,
+  );
 
   return (
     <section className={styles.cityCard}>

@@ -4,9 +4,9 @@ import { BlurContext, WeatherContext } from 'context';
 import styles from './App.module.css';
 
 export const App = () => {
-  const { weatherData, isWeatherDataFailed } = useContext(WeatherContext);
-
   const contentToBlurRef = useRef(null);
+
+  const { weatherData, isWeatherDataFailed } = useContext(WeatherContext);
 
   const highlightHeader = () => {
     contentToBlurRef.current.classList.add('blur');

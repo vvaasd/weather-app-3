@@ -1,9 +1,9 @@
+import { cn } from 'utils';
 import { useRef, useState, useContext, useEffect } from 'react';
 import { Dropdown, Input, SearchDropdownContent } from 'components';
-import { cn, getIsInputValueValid } from 'utils';
 import { useDebounce, useOutsideInteraction } from 'hooks';
-import { SEARCH_STATUSES } from 'constants';
-import { ApiService } from 'services';
+import { SEARCH_STATUSES, LS_KEYS } from 'constants';
+import { ApiService, StorageService, StringService } from 'services';
 import { BlurContext, WeatherContext } from 'context';
 import styles from './WeatherSearch.module.css';
 
@@ -12,24 +12,19 @@ const MIN_SYMBOLS_TO_SEARCH = 3;
 export const WeatherSearch = (props) => {
   const { isDropdownOpen, setIsDropdownOpen, className } = props;
 
-  const { highlightHeader, unhighlightHeader } = useContext(BlurContext);
-  const {
-    setWeatherData,
-    setIsWeatherDataFailed,
-    history,
-    onChangeHistory,
-    onClearHistory,
-  } = useContext(WeatherContext);
-
+  const inputRef = useRef(null);
   const wrapperRef = useRef(null);
+  const foundResult = useRef({});
+  const { highlightHeader, unhighlightHeader } = useContext(BlurContext);
+  const { setWeatherData, setIsWeatherDataFailed, onChangeHistory } =
+    useContext(WeatherContext);
   const [inputValue, setInputValue] = useState('');
   const [searchStatus, setSearchStatus] = useState(SEARCH_STATUSES.history);
   const [queryCities, setQueryCities] = useState([]);
-  const foundResult = useRef({});
   const debouncedInputValue = useDebounce(inputValue);
 
   const onInputChange = (value) => {
-    if (!getIsInputValueValid(value)) {
+    if (!StringService.getIsInputValueValid(value)) {
       return;
     }
 
@@ -43,7 +38,6 @@ export const WeatherSearch = (props) => {
   };
 
   const onDropdownOpen = () => {
-    setSearchStatus(SEARCH_STATUSES.history);
     setIsDropdownOpen(true);
     highlightHeader();
   };
@@ -61,7 +55,7 @@ export const WeatherSearch = (props) => {
       foundResult.current = newWeatherData;
 
       setQueryCities([]);
-      setSearchStatus(SEARCH_STATUSES.success);
+      setSearchStatus(SEARCH_STATUSES.result);
       setIsWeatherDataFailed(false);
     } catch (error) {
       console.log(error);
@@ -76,8 +70,6 @@ export const WeatherSearch = (props) => {
     setInputValue('');
     onDropdownClose();
   };
-
-  useOutsideInteraction(wrapperRef, onDropdownClose);
 
   const fetchAndSetQueryCities = async (cityName) => {
     if (!cityName) {
@@ -104,6 +96,25 @@ export const WeatherSearch = (props) => {
     fetchAndSetQueryCities(inputValue);
   };
 
+  const onClickGeolocation = () => {
+    onDropdownOpen();
+    setSearchStatus(SEARCH_STATUSES.geolocation);
+  };
+
+  const onConfirmGeolocation = (weatherData) => {
+    const { city } = weatherData;
+    StorageService.set(LS_KEYS.storedCity, { city });
+    setWeatherData(weatherData);
+    onDropdownClose();
+  };
+
+  const onDenyGeolocation = () => {
+    setSearchStatus(SEARCH_STATUSES.history);
+    inputRef.current.focus();
+  };
+
+  useOutsideInteraction(wrapperRef, onDropdownClose);
+
   useEffect(() => {
     if (debouncedInputValue.length >= MIN_SYMBOLS_TO_SEARCH) {
       fetchAndSetQueryCities(inputValue);
@@ -114,6 +125,8 @@ export const WeatherSearch = (props) => {
   return (
     <div className={cn(styles.wrapper, className)} ref={wrapperRef}>
       <Input
+        ref={inputRef}
+        placeholder="Поиск по городу"
         value={inputValue}
         onSubmit={onFormSubmit}
         onFocus={onDropdownOpen}
@@ -123,18 +136,20 @@ export const WeatherSearch = (props) => {
         onClear={() => {
           onInputChange('');
         }}
-        placeholder="Поиск по городу"
+        onClickGeolocation={onClickGeolocation}
       />
       <Dropdown isOpen={isDropdownOpen} className={styles.dropdown}>
         <SearchDropdownContent
           searchStatus={searchStatus}
-          history={history}
           queryCities={queryCities}
-          clearHistory={onClearHistory}
           foundResult={foundResult.current}
           onSelectResult={onSelectResult}
           onSelectQueryCity={onSelectQueryCity}
           highlightedCityText={inputValue}
+          onDropdownClose={onDropdownClose}
+          setSearchStatus={setSearchStatus}
+          onConfirmGeolocation={onConfirmGeolocation}
+          onDenyGeolocation={onDenyGeolocation}
         />
       </Dropdown>
     </div>

@@ -1,0 +1,29 @@
+.btn {
+  box-shadow: -2px 0 6px 0 rgba(0, 0, 0, 0.15);
+  background-color: var(--tone-light-600-dark-500);
+}
+
+.btn.loading {
+  background-color: var(--filled-200);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.icon g path {
+  stroke: var(--filled-700);
+}
+
+@media screen and (max-width: 767px) {
+  .btn {
+    height: 32px;
+    width: 40px;
+  }
+
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+}

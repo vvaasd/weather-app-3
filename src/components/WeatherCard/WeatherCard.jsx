@@ -1,7 +1,7 @@
 import { Icon, WeatherCardSkeleton } from 'components';
-import { cn, upperCaseFirst } from 'utils';
-import { DateService } from 'services';
-
+import { cn } from 'utils';
+import { DateService, StringService } from 'services';
+import { IMAGE_NAMES } from 'constants';
 import styles from './WeatherCard.module.css';
 
 export const WeatherCard = (props) => {
@@ -47,27 +47,29 @@ export const WeatherCard = (props) => {
         <span className={styles.block}>
           <span className={styles.text}>{timeText}</span>
           <span className={styles.text}>
-            {upperCaseFirst(weatherData.weather.now.weatherType)}
+            {StringService.upperCaseFirst(weatherData.weather.now.weatherType)}
           </span>
         </span>
       </button>
-      <div className={styles.rightContent}>
-        <button
-          type="button"
-          onClick={() => {
-            onClickFavorite(weatherData);
-          }}
-          className={cn(styles.likeBtn, 'btn-reset')}
-          disabled={isFavoriteBtnDisabled && !isFavorite}
-        >
-          <Icon
-            name={'heart'}
-            className={cn(styles.likeIcon, {
-              [styles.filled]: isFavorite,
-            })}
-          />
-        </button>
-      </div>
+      {isFavorite !== undefined && (
+        <div className={styles.rightContent}>
+          <button
+            type="button"
+            onClick={() => {
+              onClickFavorite(weatherData);
+            }}
+            className={cn(styles.likeBtn, 'btn-reset')}
+            disabled={isFavoriteBtnDisabled && !isFavorite}
+          >
+            <Icon
+              name={IMAGE_NAMES.heart}
+              className={cn(styles.likeIcon, {
+                [styles.filled]: isFavorite,
+              })}
+            />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

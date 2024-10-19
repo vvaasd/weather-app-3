@@ -31,8 +31,9 @@
   transition: width var(--transition-medium);
 }
 
-.visuallyHidden {
+.hidden {
   opacity: 0;
+  pointer-events: none;
 }
 
 @media screen and (max-width: 1023px) {

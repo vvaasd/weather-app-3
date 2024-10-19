@@ -11,6 +11,10 @@
   border-radius: var(--std-border-radius);
 }
 
+.wrapper.highlighted {
+  background-color: var(--filled-200);
+}
+
 .input {
   width: 100%;
   padding: 12px 16px;
@@ -30,10 +34,13 @@
 }
 
 .btn {
-  display: block;
-  width: 28px;
-  height: 28px;
-  margin-right: 16px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon {
+  width: inherit;
+  height: inherit;
 }
 
 .icon path {
@@ -50,11 +57,6 @@
   }
 }
 
-.wrapper:focus-within,
-.active {
-  background-color: var(--filled-200);
-}
-
 @media screen and (max-width: 767px) {
   .input {
     padding: 8px 12px;
@@ -65,6 +67,5 @@
   .btn {
     width: 16px;
     height: 16px;
-    margin-right: 12px;
   }
 }

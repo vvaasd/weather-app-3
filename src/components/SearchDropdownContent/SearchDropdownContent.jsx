@@ -6,13 +6,10 @@ import {
   Favorites,
   WeatherCardSkeleton,
   Error,
+  Button,
 } from 'components';
-import {
-  cn,
-  getIsCityFavorite,
-  splitStringByStart,
-  upperCaseFirst,
-} from 'utils';
+import { cn, getIsCityFavorite } from 'utils';
+import { StringService } from 'services';
 import { useContext } from 'react';
 import { WeatherContext } from 'context';
 import styles from './SearchDropdownContent.module.css';
@@ -20,16 +17,24 @@ import styles from './SearchDropdownContent.module.css';
 export const SearchDropdownContent = (props) => {
   const {
     searchStatus,
-    history,
-    clearHistory,
     queryCities,
     onSelectQueryCity,
     foundResult,
     onSelectResult,
     highlightedCityText,
+    onConfirmGeolocation,
+    onDenyGeolocation,
   } = props;
 
-  const { favorites, onChangeFavorites } = useContext(WeatherContext);
+  const {
+    favorites,
+    onChangeFavorites,
+    history,
+    onClearHistory,
+    geolocationWeatherData,
+    isGeolocationFailed,
+    isGeolocationLoading,
+  } = useContext(WeatherContext);
 
   let title = '';
   let content = null;
@@ -48,7 +53,51 @@ export const SearchDropdownContent = (props) => {
       content = <WeatherCardSkeleton className={styles.weatherCard} />;
       break;
 
-    case SEARCH_STATUSES.success:
+    case SEARCH_STATUSES.geolocation:
+      if (isGeolocationFailed) {
+        title = 'Местоположение не определено';
+        content = (
+          <div className={styles.list}>
+            <p className={cn(styles.text, styles.errorText)}>
+              К сожалению, не удалось определить вашу геопозицию.
+            </p>
+            <p className={cn(styles.text, styles.errorText)}>
+              Воспользуйтесь поиском или попробуйте
+              <br />
+              еще раз позднее.
+            </p>
+          </div>
+        );
+      } else if (isGeolocationLoading) {
+        title = 'Определяем геолокацию...';
+        content = <WeatherCardSkeleton className={styles.weatherCard} />;
+      } else {
+        title = 'Вы находитесь в этом городе?';
+        content = (
+          <>
+            <WeatherCard
+              className={styles.weatherCard}
+              onClick={onSelectResult}
+              weatherData={geolocationWeatherData}
+            />
+            <div className={styles.confirm}>
+              <Button noBackground onClick={onDenyGeolocation}>
+                Нет
+              </Button>
+              <Button
+                onClick={() => {
+                  onConfirmGeolocation(geolocationWeatherData);
+                }}
+              >
+                Да
+              </Button>
+            </div>
+          </>
+        );
+      }
+      break;
+
+    case SEARCH_STATUSES.result:
       title = 'Результат поиска';
       content = (
         <WeatherCard
@@ -73,7 +122,7 @@ export const SearchDropdownContent = (props) => {
           );
         } else {
           content = (
-            <ul className={cn(styles.cardsList, 'list-reset')}>
+            <ul className={cn(styles.list, 'list-reset')}>
               {history
                 .map((historyElement) => (
                   <li key={`history-city_${historyElement.city.id}`}>
@@ -101,10 +150,11 @@ export const SearchDropdownContent = (props) => {
         content = (
           <ul className={'list-reset'}>
             {queryCities.map((cityInfo) => {
-              const [highlightedPart, unhighlightedPart] = splitStringByStart(
-                cityInfo.name,
-                highlightedCityText,
-              );
+              const [highlightedPart, unhighlightedPart] =
+                StringService.splitStringByStart(
+                  cityInfo.name,
+                  highlightedCityText,
+                );
 
               return (
                 <li
@@ -120,14 +170,14 @@ export const SearchDropdownContent = (props) => {
                   >
                     {highlightedPart && (
                       <span className={cn(styles.text, styles.highlighted)}>
-                        {upperCaseFirst(highlightedPart)}
+                        {StringService.upperCaseFirst(highlightedPart)}
                       </span>
                     )}
                     {unhighlightedPart && (
                       <span className={cn(styles.text, styles.unhighlighted)}>
                         {highlightedPart
                           ? unhighlightedPart
-                          : upperCaseFirst(unhighlightedPart)}
+                          : StringService.upperCaseFirst(unhighlightedPart)}
                       </span>
                     )}
                   </button>
@@ -153,22 +203,39 @@ export const SearchDropdownContent = (props) => {
       );
       break;
 
+    case SEARCH_STATUSES.geolocationError:
+      title = 'Местоположение не определено';
+      content = (
+        <div className={styles.list}>
+          <p className={cn(styles.text, styles.errorText)}>
+            К сожалению, не удалось определить вашу геопозицию.
+          </p>
+          <p className={cn(styles.text, styles.errorText)}>
+            Воспользуйтесь поиском или попробуйте
+            <br />
+            еще раз позднее.
+          </p>
+        </div>
+      );
+      break;
+
     default:
       break;
   }
 
+  const isShownHistory =
+    searchStatus === SEARCH_STATUSES.history && !queryCities.length;
+
   return (
     <div className={styles.wrapper}>
-      {searchStatus === SEARCH_STATUSES.history && !queryCities.length && (
-        <Favorites onSelect={onSelectResult} />
-      )}
+      {isShownHistory && <Favorites onSelect={onSelectResult} />}
       <div>
         <div className={styles.header}>
           <h3 className={styles.title}>{title}</h3>
-          {searchStatus === SEARCH_STATUSES.history && (
+          {isShownHistory && (
             <button
               type="button"
-              onClick={clearHistory}
+              onClick={onClearHistory}
               disabled={history.length === 0}
               className={styles.clearHistoryBtn}
             >

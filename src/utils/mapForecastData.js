@@ -1,5 +1,4 @@
-import { upperCaseFirst } from './upperCaseFirst';
-import { DateService } from 'services';
+import { DateService, StringService } from 'services';
 import { SLIDER_TYPES } from 'constants';
 
 export const mapForecastData = (forecastList) => {
@@ -17,7 +16,7 @@ export const mapForecastData = (forecastList) => {
   const fiveDaysForecast = Array.from({ length: 5 }, (_, i) => {
     const startIndex = i * 8;
 
-    const date = upperCaseFirst(
+    const date = StringService.upperCaseFirst(
       DateService.getForemattedSliderDate(
         new Date(forecastList[startIndex]?.dt * 1000),
         SLIDER_TYPES.forFiveDays,

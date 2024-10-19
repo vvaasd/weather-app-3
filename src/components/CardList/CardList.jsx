@@ -1,4 +1,5 @@
 import { Card, CardSkeleton } from 'components';
+import { IMAGE_NAMES } from 'constants';
 import {
   cn,
   getWindDirection,
@@ -55,7 +56,7 @@ export const CardList = (props) => {
       <li>
         <Card
           title={'Влажность'}
-          iconName={'humidity'}
+          iconName={IMAGE_NAMES.humidity}
           value={currentWeather.humidity}
           hasProgressBar={true}
           pbValue={currentWeather.humidity}
@@ -68,7 +69,7 @@ export const CardList = (props) => {
       <li>
         <Card
           title={'Давление'}
-          iconName={'pressure'}
+          iconName={IMAGE_NAMES.pressure}
           value={convertedPressureValue}
           hasProgressBar={true}
           pbValue={pressurePbValue}
@@ -79,7 +80,7 @@ export const CardList = (props) => {
       <li>
         <Card
           title={'Видимость'}
-          iconName={'visibility'}
+          iconName={IMAGE_NAMES.visibility}
           value={convertedVisibility}
           hasProgressBar={true}
           pbValue={visibilityPbValue}
@@ -91,7 +92,7 @@ export const CardList = (props) => {
       <li>
         <Card
           title={'Рассвет'}
-          iconName={'sunrise'}
+          iconName={IMAGE_NAMES.sunrise}
           value={sunriseTimeStr}
           description={sunriseDescription}
         />
@@ -99,7 +100,7 @@ export const CardList = (props) => {
       <li>
         <Card
           title={'Закат'}
-          iconName={'sunset'}
+          iconName={IMAGE_NAMES.sunset}
           value={sunsetTimeStr}
           description={sunsetDescription}
         />
@@ -107,7 +108,7 @@ export const CardList = (props) => {
       <li>
         <Card
           title={'Сила ветра'}
-          iconName={'wind'}
+          iconName={IMAGE_NAMES.wind}
           value={Math.round(currentWeather.wind.speed)}
           units={'м/с'}
           imgRotationDeg={

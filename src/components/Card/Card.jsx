@@ -1,6 +1,6 @@
 import { ProgressBar, Icon } from 'components';
-import { cn } from 'utils';
 import { IMAGE_NAMES } from 'constants';
+import { cn } from 'utils';
 import styles from './Card.module.css';
 
 export const Card = (props) => {
