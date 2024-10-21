@@ -10,15 +10,14 @@ export const Switch = (props) => {
 
   const { theme, onToggleTheme } = useContext(ThemeContext);
 
-  const isLight = theme === THEMES.light;
-  const isDark = theme === THEMES.dark;
-
   return (
     <div className={cn(styles.wrapper, className)} {...otherProps}>
       <button
         type="button"
         onClick={onToggleTheme}
-        className={cn(styles.btn, 'btn-reset', { [styles.selected]: isLight })}
+        className={cn(styles.btn, 'btn-reset', {
+          [styles.selected]: theme === THEMES.light,
+        })}
       >
         <Icon
           name={IMAGE_NAMES.day}
@@ -28,7 +27,9 @@ export const Switch = (props) => {
       <button
         type="button"
         onClick={onToggleTheme}
-        className={cn(styles.btn, 'btn-reset', { [styles.selected]: isDark })}
+        className={cn(styles.btn, 'btn-reset', {
+          [styles.selected]: theme === THEMES.dark,
+        })}
       >
         <Icon
           name={IMAGE_NAMES.night}

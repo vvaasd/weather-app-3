@@ -28,7 +28,7 @@ export const CityCard = (props) => {
   return (
     <section className={styles.cityCard}>
       <div className={styles.dateTimeCity}>
-        <h1 className={styles.location}>{currentCity.name}</h1>
+        <h2 className={styles.location}>{currentCity.name}</h2>
         <p className={styles.date}>{dateText}</p>
         <time className={styles.time}>{timeText}</time>
       </div>

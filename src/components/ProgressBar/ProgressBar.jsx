@@ -1,4 +1,5 @@
 import { cn } from 'utils';
+import { PROGRESS_BAR_TYPES } from 'constants';
 import styles from './ProgressBar.module.css';
 
 export const ProgressBar = (props) => {
@@ -14,7 +15,7 @@ export const ProgressBar = (props) => {
       ></div>
       <div
         className={cn(styles.barStripe, {
-          [styles.gradient]: type === 'gradient',
+          [styles.gradient]: type === PROGRESS_BAR_TYPES.gradient,
         })}
         style={{
           '--progress-position': `${validCurrent}%`,

@@ -1,6 +1,6 @@
+import { useContext } from 'react';
 import { MAX_FAVORITE_CITIES } from 'constants';
 import { WeatherCard } from 'components';
-import { useContext } from 'react';
 import { WeatherContext } from 'context';
 import { cn, getIsCityFavorite } from 'utils';
 import styles from './Favorites.module.css';
@@ -11,7 +11,6 @@ export const Favorites = (props) => {
   const { favorites, onChangeFavorites } = useContext(WeatherContext);
 
   const favoritesCount = favorites.length;
-
   if (favoritesCount === 0) {
     return null;
   }
@@ -19,7 +18,7 @@ export const Favorites = (props) => {
   return (
     <div>
       <div className={styles.header}>
-        <h3 className={styles.title}>Изранные</h3>
+        <h4 className={styles.title}>Изранные</h4>
         <span
           className={styles.title}
         >{`${favoritesCount}/${MAX_FAVORITE_CITIES}`}</span>

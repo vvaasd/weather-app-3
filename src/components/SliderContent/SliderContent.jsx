@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect, useContext } from 'react';
 import { Button, Icon, SliderCardSkeleton, Error } from 'components';
 import { useElementWidth } from 'hooks';
-import { THROTTLE_INTERVAL, IMAGE_NAMES } from 'constants';
+import { IMAGE_NAMES } from 'constants';
 import { WeatherContext } from 'context';
 import { cn } from 'utils';
 import styles from './SliderContent.module.css';
+
+const THROTTLE_INTERVAL = 150;
+const CARD_ACCURACY = 10;
 
 export const SliderContent = (props) => {
   const { activeSlider } = props;
@@ -21,9 +24,7 @@ export const SliderContent = (props) => {
     sliderContentRef,
     THROTTLE_INTERVAL,
   );
-
   const endTranslate = sliderWidth - sliderContentWidth;
-  const accuracy = 10; //карточки могут отличаться на пару пикселей друг от друга, это значение есть погрешность для нормального свайпа последней карточки
 
   const forecast = weatherData?.weather?.forecast || null;
   const sliderData = forecast ? forecast[activeSlider] : null;
@@ -45,7 +46,7 @@ export const SliderContent = (props) => {
 
   const translateRight = () => {
     setTranslateX((prev) =>
-      prev <= endTranslate + stepValue + accuracy
+      prev <= endTranslate + stepValue + CARD_ACCURACY
         ? endTranslate
         : prev - stepValue,
     );

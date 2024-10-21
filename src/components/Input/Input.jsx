@@ -6,7 +6,7 @@ import styles from './Input.module.css';
 
 const Input = (props, ref) => {
   const {
-    onSubmit,
+    onSubmit = () => {},
     value,
     onClear,
     onFocus = () => {},
@@ -28,7 +28,10 @@ const Input = (props, ref) => {
       className={cn(styles.wrapper, {
         [styles.highlighted]: isFocused,
       })}
-      onSubmit={onSubmit}
+      onSubmit={(event) => {
+        event.preventDefault();
+        onSubmit();
+      }}
     >
       <input
         ref={ref}

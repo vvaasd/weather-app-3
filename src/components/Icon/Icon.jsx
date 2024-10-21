@@ -4,7 +4,6 @@ export const Icon = (props) => {
   const { name, ...otherProps } = props;
 
   const SvgComponent = svgComponents[name];
-
   if (!SvgComponent) {
     return null;
   }

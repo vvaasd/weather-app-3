@@ -6,6 +6,7 @@
 
   width: 100%;
   padding: 8px;
+
   color: var(--filled-light-100-dark-900);
 }
 
@@ -56,9 +57,9 @@
 
 .description {
   display: flex;
+  gap: 8px;
   align-items: center;
   justify-content: center;
-  gap: 8px;
 }
 
 .weatherTypeIcon {

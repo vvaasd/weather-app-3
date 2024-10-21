@@ -8,20 +8,24 @@ import { BlurContext, WeatherContext } from 'context';
 import styles from './WeatherSearch.module.css';
 
 const MIN_SYMBOLS_TO_SEARCH = 3;
+const INPUT_DEBOUNCE_DELAY = 1000;
 
 export const WeatherSearch = (props) => {
   const { isDropdownOpen, setIsDropdownOpen, className } = props;
 
   const inputRef = useRef(null);
   const wrapperRef = useRef(null);
-  const foundResult = useRef({});
+  const foundResultRef = useRef();
+  const queryCitiesControllerRef = useRef();
   const { highlightHeader, unhighlightHeader } = useContext(BlurContext);
   const { setWeatherData, setIsWeatherDataFailed, onChangeHistory } =
     useContext(WeatherContext);
   const [inputValue, setInputValue] = useState('');
   const [searchStatus, setSearchStatus] = useState(SEARCH_STATUSES.history);
   const [queryCities, setQueryCities] = useState([]);
-  const debouncedInputValue = useDebounce(inputValue);
+  const debouncedInputValue = useDebounce(inputValue, {
+    delay: INPUT_DEBOUNCE_DELAY,
+  });
 
   const onInputChange = (value) => {
     if (!StringService.getIsInputValueValid(value)) {
@@ -37,9 +41,10 @@ export const WeatherSearch = (props) => {
     }
   };
 
-  const onDropdownOpen = () => {
+  const onDropdownOpen = (searchStatus) => {
     setIsDropdownOpen(true);
     highlightHeader();
+    setSearchStatus(searchStatus || SEARCH_STATUSES.history);
   };
 
   const onDropdownClose = () => {
@@ -48,19 +53,19 @@ export const WeatherSearch = (props) => {
   };
 
   const onSelectQueryCity = async (cityInfo) => {
-    setSearchStatus(SEARCH_STATUSES.loadingResult);
     try {
+      setSearchStatus(SEARCH_STATUSES.loadingResult);
       const newWeatherData = await ApiService.getWeatherData(cityInfo);
 
-      foundResult.current = newWeatherData;
+      foundResultRef.current = newWeatherData;
 
       setQueryCities([]);
       setSearchStatus(SEARCH_STATUSES.result);
       setIsWeatherDataFailed(false);
     } catch (error) {
-      console.log(error);
       setSearchStatus(SEARCH_STATUSES.error);
       setIsWeatherDataFailed(true);
+      console.log(error);
     }
   };
 
@@ -76,34 +81,34 @@ export const WeatherSearch = (props) => {
       return;
     }
 
-    setSearchStatus(SEARCH_STATUSES.loader);
     try {
+      if (queryCitiesControllerRef.current) {
+        queryCitiesControllerRef.current.abort();
+      }
+      queryCitiesControllerRef.current = new AbortController();
+      const signal = queryCitiesControllerRef.current.signal;
+
+      setSearchStatus(SEARCH_STATUSES.loader);
       const citiesInfo = await ApiService.getCityInfo(cityName, {
         getArray: true,
+        signal,
       });
 
       setQueryCities(citiesInfo);
       setSearchStatus(SEARCH_STATUSES.history);
     } catch (error) {
-      console.log(error);
-      setSearchStatus(SEARCH_STATUSES.notFound);
-      setQueryCities([]);
+      if (error.name !== 'AbortError') {
+        setSearchStatus(SEARCH_STATUSES.notFound);
+        setQueryCities([]);
+        console.log(error);
+      }
     }
-  };
-
-  const onFormSubmit = (event) => {
-    event.preventDefault();
-    fetchAndSetQueryCities(inputValue);
-  };
-
-  const onClickGeolocation = () => {
-    onDropdownOpen();
-    setSearchStatus(SEARCH_STATUSES.geolocation);
   };
 
   const onConfirmGeolocation = (weatherData) => {
     const { city } = weatherData;
     StorageService.set(LS_KEYS.storedCity, { city });
+    onChangeHistory(weatherData);
     setWeatherData(weatherData);
     onDropdownClose();
   };
@@ -128,7 +133,6 @@ export const WeatherSearch = (props) => {
         ref={inputRef}
         placeholder="Поиск по городу"
         value={inputValue}
-        onSubmit={onFormSubmit}
         onFocus={onDropdownOpen}
         onChange={(event) => {
           onInputChange(event.target.value);
@@ -136,18 +140,18 @@ export const WeatherSearch = (props) => {
         onClear={() => {
           onInputChange('');
         }}
-        onClickGeolocation={onClickGeolocation}
+        onClickGeolocation={() => {
+          onDropdownOpen(SEARCH_STATUSES.geolocation);
+        }}
       />
       <Dropdown isOpen={isDropdownOpen} className={styles.dropdown}>
         <SearchDropdownContent
           searchStatus={searchStatus}
           queryCities={queryCities}
-          foundResult={foundResult.current}
+          foundResult={foundResultRef.current}
           onSelectResult={onSelectResult}
           onSelectQueryCity={onSelectQueryCity}
           highlightedCityText={inputValue}
-          onDropdownClose={onDropdownClose}
-          setSearchStatus={setSearchStatus}
           onConfirmGeolocation={onConfirmGeolocation}
           onDenyGeolocation={onDenyGeolocation}
         />

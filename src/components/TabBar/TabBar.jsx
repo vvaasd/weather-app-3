@@ -6,7 +6,7 @@ import styles from './TabBar.module.css';
 export const TabBar = ({ activeSliderType, handleSwitch }) => {
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Прогноз:</h2>
+      <h5 className={styles.title}>Прогноз:</h5>
       <ul className={cn('list-reset', styles.tabList)}>
         <li>
           <Tab

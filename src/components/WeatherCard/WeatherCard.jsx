@@ -2,7 +2,10 @@ import { Icon, WeatherCardSkeleton } from 'components';
 import { cn } from 'utils';
 import { DateService, StringService } from 'services';
 import { IMAGE_NAMES } from 'constants';
+import { useContext, useLayoutEffect, useRef } from 'react';
+import { background } from 'assets/img/background';
 import styles from './WeatherCard.module.css';
+import { ThemeContext } from 'context';
 
 export const WeatherCard = (props) => {
   const {
@@ -13,6 +16,17 @@ export const WeatherCard = (props) => {
     isFavoriteBtnDisabled,
     className,
   } = props;
+
+  const { theme } = useContext(ThemeContext);
+
+  const wrapperRef = useRef(null);
+
+  useLayoutEffect(() => {
+    if (weatherData?.weather && wrapperRef?.current) {
+      const imageKey = weatherData.weather.now.iconName.substr(0, 2);
+      wrapperRef.current.style.backgroundImage = `url('${background[imageKey][theme]}')`;
+    }
+  }, [weatherData, theme]);
 
   if (weatherData?.isError || !weatherData?.weather) {
     return (
@@ -30,7 +44,7 @@ export const WeatherCard = (props) => {
   const timeText = DateService.getFormattedShortTime(dateByTimezone);
 
   return (
-    <div className={cn(styles.wrapper, className)}>
+    <div className={cn(styles.wrapper, className)} ref={wrapperRef}>
       <button
         type="button"
         className={cn(styles.btn, 'btn-reset')}

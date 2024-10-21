@@ -9,16 +9,16 @@
   padding: 32px;
 
   background-color: var(--filled-light-700-dark-300);
-  background-image: url('/public/images/background.jpg');
+  background-image: url('/src/assets/img/background/empty.png');
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
 }
 
 .container {
+  background-color: var(--tone-600);
   backdrop-filter: blur(var(--std-blur));
   border-radius: var(--std-border-radius);
-  background-color: var(--tone-600);
 }
 
 .main {

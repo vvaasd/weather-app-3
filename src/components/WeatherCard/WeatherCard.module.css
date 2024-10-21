@@ -1,11 +1,11 @@
 .wrapper {
-  display: flex;
   overflow: hidden;
-  border-radius: var(--std-border-radius);
-  background-image: url('/public/images/background.jpg');
+  display: flex;
+
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  border-radius: var(--std-border-radius);
 }
 
 .wrapper.skeleton {
@@ -25,21 +25,25 @@
 }
 
 .error {
-  padding: 16px;
   flex-grow: 1;
+  padding: 16px;
 }
 
 .block {
-  width: 100%;
   display: flex;
+  gap: 16px;
   justify-content: space-between;
+
+  width: 100%;
+
+  text-align: left;
 }
 
 .title {
-  text-align: left;
-  font-weight: 700;
   font-size: 24px;
+  font-weight: 700;
   line-height: 32px;
+  text-align: left;
 }
 
 .text {
@@ -49,12 +53,12 @@
 
 .rightContent {
   position: relative;
-  width: 56px;
 
-  border-radius: var(--std-border-radius);
+  padding-inline: 28px;
 
-  backdrop-filter: blur(var(--std-blur));
   background-color: var(--tone-600);
+  backdrop-filter: blur(var(--std-blur));
+  border-radius: var(--std-border-radius);
 }
 
 .likeBtn {
@@ -70,6 +74,7 @@
 .likeIcon {
   fill: var(--filled-light-100-dark-900);
   stroke: var(--filled-light-100-dark-900);
+  transition: fill var(--transition-fast), stroke var(--transition-fast);
 }
 
 .likeBtn:disabled .likeIcon {
@@ -78,7 +83,11 @@
 
 @media (hover: hover) {
   .likeBtn:not(:disabled):hover .likeIcon {
-    fill: var(--filled-light-100-dark-900);
+    stroke: var(--filled-light-400-dark-600);
+  }
+
+  .likeBtn:not(:disabled):hover .likeIcon.filled {
+    fill: var(--filled-light-400-dark-600);
   }
 }
 
@@ -112,6 +121,10 @@
     padding: 12px;
   }
 
+  .block {
+    gap: 12px;
+  }
+
   .error {
     padding: 12px;
   }
@@ -127,7 +140,7 @@
   }
 
   .rightContent {
-    width: 40px;
+    padding-inline: 20px;
   }
 
   .likeBtn {

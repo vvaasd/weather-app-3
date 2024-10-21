@@ -9,7 +9,7 @@
   width: 100%;
   height: 8px;
 
-  --tone-500: rgba(138, 138, 138, 0.4);
+  --tone-500: rgb(138 138 138 / 40%);
 
   background-color: var(--tone-200);
   border-radius: var(--std-border-radius);
@@ -23,21 +23,30 @@
 }
 
 .barStripe.gradient {
-  transition: background-image var(--transition-long);
-
-  background-image: radial-gradient(
+  /* background-image: radial-gradient(
     50% 9453.13% at 50% 50%,
     var(--tone-500) 0%,
     var(--tone-500) 45.12%,
     var(--filled-200) 100%,
     var(--filled-200) 100%
-  );
+  ); */
+
+  /* background-image: linear-gradient(
+    to right,
+    var(--tone-200) 0%,
+    #545454 40%,
+    #545454 60%,
+    var(--tone-200) 100%
+  ); */
+
+  background-image: var(--progress-bar-gradient);
 }
 
 .barTumbler {
   width: 8px;
   height: 8px;
   margin-left: calc(var(--progress-position) - 4px);
+
   background-color: var(--filled-light-100-dark-900);
   border-radius: 50%;
 }

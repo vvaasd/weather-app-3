@@ -1,8 +1,8 @@
 .wrapper {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   gap: 16px;
+  justify-content: center;
 }
 
 .wrapper.large {
@@ -16,17 +16,18 @@
 }
 
 .header.large {
-  justify-content: center;
   gap: 16px;
+  justify-content: center;
   text-align: center;
 }
 
 .message {
-  color: var(--filled-900);
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 32px;
   margin-block: 0;
+
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--filled-900);
 }
 
 .message.light {
@@ -34,10 +35,10 @@
 }
 
 .subMessage {
-  color: var(--filled-700);
+  margin-block: 0;
   font-size: 20px;
   line-height: 24px;
-  margin-block: 0;
+  color: var(--filled-700);
 }
 
 .subMessage.light {

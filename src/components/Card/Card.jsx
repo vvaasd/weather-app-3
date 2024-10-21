@@ -1,5 +1,5 @@
 import { ProgressBar, Icon } from 'components';
-import { IMAGE_NAMES } from 'constants';
+import { IMAGE_NAMES, PROGRESS_BAR_TYPES } from 'constants';
 import { cn } from 'utils';
 import styles from './Card.module.css';
 
@@ -22,7 +22,7 @@ export const Card = (props) => {
 
   return (
     <article className={styles.card} {...otherProps}>
-      <h2 className={styles.title}>{title}</h2>
+      <h3 className={styles.title}>{title}</h3>
       <Icon
         className={cn(styles.icon)}
         name={IMAGE_NAMES[iconName]}
@@ -38,7 +38,11 @@ export const Card = (props) => {
         {hasProgressBar && (
           <ProgressBar
             current={pbValue}
-            type={gradientPb ? 'gradient' : 'normal'}
+            type={
+              gradientPb
+                ? PROGRESS_BAR_TYPES.gradient
+                : PROGRESS_BAR_TYPES.normal
+            }
           />
         )}
         <div

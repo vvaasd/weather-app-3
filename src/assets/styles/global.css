@@ -1,22 +1,26 @@
 * {
-  transition: all var(--transition-fast), color var(--transition-long),
-    background-color var(--transition-long);
+  transition: all var(--transition-fast), letter-spacing 0s,
+    color var(--transition-long), fill var(--transition-long),
+    stroke var(--transition-long), background-color var(--transition-long),
+    background-image var(--transition-long);
 }
 
 body {
   margin: 0;
   font-family: var(--font-family);
+  font-variant-numeric: lining-nums;
+  letter-spacing: var(--std-letter-spacing);
 }
 
 .btn-reset {
   padding: 0;
   background-color: transparent;
-  border: 0;
+  border: none;
 }
 
 .list-reset {
-  margin: 0;
-  padding: 0;
+  margin-block: 0;
+  padding-left: 0;
   list-style: none;
 }
 
@@ -71,10 +75,13 @@ img {
   height: 100%;
 }
 
-button {
-  font-family: inherit;
-}
-
 button:not(:disabled) {
   cursor: pointer;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-variant-numeric: inherit;
+  letter-spacing: inherit;
 }

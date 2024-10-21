@@ -1,10 +1,22 @@
 .btn {
-  box-shadow: -2px 0 6px 0 rgba(0, 0, 0, 0.15);
   background-color: var(--tone-light-600-dark-500);
+  box-shadow: -2px 0 6px 0 rgb(0 0 0 / 15%);
 }
 
 .btn.loading {
   background-color: var(--filled-200);
+}
+
+@media (hover: hover) {
+  .btn:hover {
+    background-color: var(--filled-200);
+  }
+}
+
+@media (hover: none) {
+  .btn:active {
+    background-color: var(--filled-200);
+  }
 }
 
 .icon {
@@ -18,8 +30,8 @@
 
 @media screen and (max-width: 767px) {
   .btn {
-    height: 32px;
     width: 40px;
+    height: 32px;
   }
 
   .icon {

@@ -4,9 +4,10 @@ import { StringService } from 'services';
 const MAX_SERCH_RESULTS = 8;
 
 export class ApiService {
-  static async getCityInfo(city, options = { getArray: false }) {
-    const maxCities = options.getArray ? MAX_SERCH_RESULTS : 1;
+  static async getCityInfo(city, options = { getArray: false, signal: null }) {
     try {
+      const maxCities = options.getArray ? MAX_SERCH_RESULTS : 1;
+
       let url;
       if (city?.city?.lat && city?.city?.lon) {
         url = `https://nominatim.openstreetmap.org/reverse.php?lat=${city.city.lat}&lon=${city.city.lon}&zoom=10&format=json&addressdetails=1&limit=${maxCities}&accept-language=ru`;
@@ -15,7 +16,7 @@ export class ApiService {
         url = `https://nominatim.openstreetmap.org/search.php?q=${validatedCityName}&format=json&addressdetails=1&limit=${maxCities}&accept-language=ru`;
       }
 
-      const response = await fetch(url);
+      const response = await fetch(url, { signal: options.signal });
 
       if (!response.ok) {
         return Promise.reject(
@@ -42,7 +43,7 @@ export class ApiService {
     }
   }
 
-  static async getCurrentWeatherData(cityData) {
+  static async getCurrentWeatherData(cityData, options = { signal: null }) {
     if (!cityData.lat || !cityData.lon) {
       return Promise.reject('Ошибка получения координат');
     }
@@ -50,6 +51,7 @@ export class ApiService {
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${cityData.lat}&lon=${cityData.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric&lang=ru`,
+        { signal: options.signal },
       );
 
       if (!response.ok) {
@@ -67,7 +69,7 @@ export class ApiService {
     }
   }
 
-  static async getForecastData(cityData) {
+  static async getForecastData(cityData, options = { signal: null }) {
     if (!cityData.lat || !cityData.lon) {
       return Promise.reject('Ошибка получения координат');
     }
@@ -75,6 +77,7 @@ export class ApiService {
     try {
       const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${cityData.lat}&lon=${cityData.lon}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric&lang=ru`,
+        { signal: options.signal },
       );
 
       if (!response.ok) {
@@ -93,17 +96,25 @@ export class ApiService {
     }
   }
 
-  static async getWeatherData(city) {
+  static async getWeatherData(city, options = { signal: null }) {
     try {
       let cityInfo = city;
       if (typeof city !== 'object') {
-        cityInfo = await ApiService.getCityInfo(city);
+        cityInfo = await ApiService.getCityInfo(city, {
+          signal: options.signal,
+        });
       } else if (!city?.name) {
-        cityInfo = await ApiService.getCityInfo(city);
+        cityInfo = await ApiService.getCityInfo(city, {
+          signal: options.signal,
+        });
       }
 
-      const now = await ApiService.getCurrentWeatherData(cityInfo);
-      const forecast = await ApiService.getForecastData(cityInfo);
+      const now = await ApiService.getCurrentWeatherData(cityInfo, {
+        signal: options.signal,
+      });
+      const forecast = await ApiService.getForecastData(cityInfo, {
+        signal: options.signal,
+      });
 
       return { city: cityInfo, weather: { now, forecast } };
     } catch (error) {
@@ -111,13 +122,17 @@ export class ApiService {
     }
   }
 
-  static async getCitiesWeatherData(weatherDataArray) {
+  static async getCitiesWeatherData(
+    weatherDataArray,
+    options = { signal: null },
+  ) {
     try {
       const dataWithWeather = await Promise.all(
         weatherDataArray.map(async (weatherDataElement) => {
           try {
             const newWeatherData = await ApiService.getWeatherData(
               weatherDataElement.city,
+              { signal: options.signal },
             );
 
             return newWeatherData;

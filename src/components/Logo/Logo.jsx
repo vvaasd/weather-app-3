@@ -17,14 +17,16 @@ export const Logo = (props) => {
     screenTypeSize <= BREAKPOINTS.tablet ? logoText.tablet : logoText.desktop;
 
   return (
-    <a
-      href="/"
-      rel="noreferrer"
-      className={cn(styles.link, className)}
-      {...otherProps}
-    >
-      <span className={styles.startText}>{start}</span>
-      <span className={styles.endText}>{end}</span>
-    </a>
+    <h1 className={styles.title}>
+      <a
+        href="/"
+        rel="noreferrer"
+        className={cn(styles.link, className)}
+        {...otherProps}
+      >
+        <span className={styles.startText}>{start}</span>
+        <span className={styles.endText}>{end}</span>
+      </a>
+    </h1>
   );
 };

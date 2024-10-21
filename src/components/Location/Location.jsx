@@ -1,7 +1,7 @@
+import { useContext } from 'react';
 import { cn } from 'utils';
 import { IMAGE_NAMES } from 'constants';
 import { Icon, Button } from 'components';
-import { useContext } from 'react';
 import { WeatherContext } from 'context';
 import styles from './Location.module.css';
 

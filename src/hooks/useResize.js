@@ -22,5 +22,6 @@ export const useResize = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
   return screenTypeSize;
 };

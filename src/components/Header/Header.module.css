@@ -32,8 +32,8 @@
 }
 
 .hidden {
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
 }
 
 @media screen and (max-width: 1023px) {
@@ -57,7 +57,7 @@
 
 @media screen and (max-width: 885px) {
   .weatherSearchWrapper {
-    width: 288px;
+    width: 294px;
   }
 }
 

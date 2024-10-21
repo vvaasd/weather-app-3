@@ -231,13 +231,13 @@ export const SearchDropdownContent = (props) => {
       {isShownHistory && <Favorites onSelect={onSelectResult} />}
       <div>
         <div className={styles.header}>
-          <h3 className={styles.title}>{title}</h3>
+          <h4 className={styles.title}>{title}</h4>
           {isShownHistory && (
             <button
               type="button"
               onClick={onClearHistory}
               disabled={history.length === 0}
-              className={styles.clearHistoryBtn}
+              className={cn(styles.clearHistoryBtn, 'btn-reset')}
             >
               <Icon
                 name={IMAGE_NAMES.trashBin}
