@@ -65,7 +65,7 @@ export const WeatherSearch = (props) => {
     } catch (error) {
       setSearchStatus(SEARCH_STATUSES.error);
       setIsWeatherDataFailed(true);
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -100,7 +100,7 @@ export const WeatherSearch = (props) => {
       if (error.name !== 'AbortError') {
         setSearchStatus(SEARCH_STATUSES.notFound);
         setQueryCities([]);
-        console.log(error);
+        console.error(error);
       }
     }
   };

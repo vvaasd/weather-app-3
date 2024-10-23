@@ -44,7 +44,7 @@ export const useSearchHistory = () => {
 
       setHistory(favoritesWithWeather);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

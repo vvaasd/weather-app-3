@@ -137,7 +137,7 @@ export class ApiService {
 
             return newWeatherData;
           } catch (error) {
-            console.log(error);
+            console.error(error);
             return { city: weatherDataElement.city, isError: true };
           }
         }),
