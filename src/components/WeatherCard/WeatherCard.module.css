@@ -1,0 +1,165 @@
+.wrapper {
+  overflow: hidden;
+  display: flex;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: var(--std-border-radius);
+}
+
+.wrapper.skeleton {
+  background: none;
+  background-color: var(--tone-200);
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+  padding: 16px;
+
+  color: var(--filled-light-100-dark-900);
+}
+
+.error {
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.block {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+
+  width: 100%;
+
+  text-align: left;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.rightContent {
+  position: relative;
+
+  padding-inline: 28px;
+
+  background-color: var(--tone-600);
+  backdrop-filter: blur(var(--std-blur));
+  border-radius: var(--std-border-radius);
+}
+
+.likeBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 24px;
+  height: 24px;
+}
+
+.likeIcon {
+  fill: var(--filled-light-100-dark-900);
+  stroke: var(--filled-light-100-dark-900);
+  transition: fill var(--transition-fast), stroke var(--transition-fast);
+}
+
+.likeBtn:disabled .likeIcon {
+  stroke: var(--tone-light-500-dark-400);
+}
+
+@media (hover: hover) {
+  .likeBtn:not(:disabled):hover .likeIcon {
+    stroke: var(--filled-light-400-dark-600);
+  }
+
+  .likeBtn:not(:disabled):hover .likeIcon.filled {
+    fill: var(--filled-light-400-dark-600);
+  }
+}
+
+@media (hover: none) {
+  .likeBtn:not(:disabled):active .likeIcon {
+    fill: var(--filled-light-100-dark-900);
+  }
+}
+
+.likeIcon:not(.filled) {
+  fill: transparent;
+}
+
+.leftTitleSkeleton {
+  width: 108px;
+  height: 32px;
+}
+
+.rightTitleSkeleton {
+  width: 32px;
+  height: 32px;
+}
+
+.textSkeleton {
+  width: 56px;
+  height: 20px;
+}
+
+@media (max-width: 767px) {
+  .btn {
+    padding: 12px;
+  }
+
+  .block {
+    gap: 12px;
+  }
+
+  .error {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .text {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .rightContent {
+    padding-inline: 20px;
+  }
+
+  .likeBtn {
+    width: 16px;
+    height: 16px;
+  }
+
+  .leftTitleSkeleton {
+    width: 72px;
+    height: 20px;
+  }
+
+  .rightTitleSkeleton {
+    width: 24px;
+    height: 20px;
+  }
+
+  .textSkeleton {
+    width: 48px;
+    height: 16px;
+  }
+}

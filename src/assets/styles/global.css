@@ -1,0 +1,87 @@
+* {
+  transition: all var(--transition-fast), letter-spacing 0s,
+    color var(--transition-long), fill var(--transition-long),
+    stroke var(--transition-long), background-color var(--transition-long),
+    background-image var(--transition-long);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  font-variant-numeric: lining-nums;
+  letter-spacing: var(--std-letter-spacing);
+}
+
+.btn-reset {
+  padding: 0;
+  background-color: transparent;
+  border: none;
+}
+
+.list-reset {
+  margin-block: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.blur {
+  filter: blur(var(--std-blur));
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--tone-100);
+  border-radius: var(--std-border-radius);
+}
+
+.skeleton::after {
+  content: '';
+
+  position: absolute;
+  top: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  opacity: 0.2;
+  background: linear-gradient(
+    to right,
+    var(--tone-500) 0%,
+    var(--tone-200) 50%,
+    var(--tone-500) 100%
+  );
+
+  animation: skeleton 1s ease-in-out infinite;
+}
+
+@keyframes skeleton {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+svg,
+img {
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+  height: 100%;
+}
+
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-variant-numeric: inherit;
+  letter-spacing: inherit;
+}

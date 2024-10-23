@@ -1,0 +1,32 @@
+.dropdown {
+  pointer-events: none;
+
+  position: absolute;
+  z-index: 1;
+
+  overflow-y: auto;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 16px;
+  padding-right: 0;
+
+  visibility: hidden;
+  opacity: 0;
+  background-color: var(--tone-100);
+  border-radius: var(--std-border-radius);
+}
+
+.dropdown.shown {
+  pointer-events: unset;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .dropdown {
+    margin-top: 12px;
+  }
+}

@@ -1,11 +1,13 @@
-import React from 'react';
+import 'assets/styles/index.css';
 import ReactDOM from 'react-dom/client';
-import './styles/index.css';
-import App from './components/app/App';
+import { WeatherContextProvider, ThemeProvider } from 'context';
+import { App } from 'components';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <WeatherContextProvider>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </WeatherContextProvider>,
 );
