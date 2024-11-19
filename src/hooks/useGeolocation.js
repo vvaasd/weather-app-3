@@ -17,7 +17,7 @@ export const useGeolocation = () => {
       setIsGeolocationFailed(false);
       setIsGeolocationLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsGeolocationFailed(true);
       setIsGeolocationLoading(false);
     }
@@ -27,7 +27,7 @@ export const useGeolocation = () => {
     setIsGeolocationLoading(true);
     const geolocator = navigator.geolocation;
     if (!geolocator) {
-      console.log('Геолокация не поддерживается');
+      console.error('Геолокация не поддерживается');
       setIsGeolocationLoading(false);
       setIsGeolocationFailed(true);
       return;
@@ -43,7 +43,7 @@ export const useGeolocation = () => {
         fetchAndSetGeolocationWeatherData({ city: coords });
       },
       (error) => {
-        console.log(error);
+        console.error(error);
         setIsGeolocationLoading(false);
         setIsGeolocationFailed(true);
       },

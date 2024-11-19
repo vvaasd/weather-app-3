@@ -7,7 +7,7 @@ import { useFavorites, useGeolocation, useSearchHistory } from 'hooks';
 const DEFAULT_CITY_NAME = 'Москва';
 
 export const WeatherContextProvider = ({ children }) => {
-  const [isWeatherDataFailed, setIsWeatherDataFailed] = useState(null);
+  const [isWeatherDataFailed, setIsWeatherDataFailed] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
   const { history, onChangeHistory, onClearHistory, fetchAndSetHistory } =
     useSearchHistory();
@@ -21,12 +21,12 @@ export const WeatherContextProvider = ({ children }) => {
 
   const fetchAndSetWeatherData = async (coords) => {
     try {
+      setIsWeatherDataFailed(false);
       const newWeatherData = await ApiService.getWeatherData(coords);
 
       setWeatherData(newWeatherData);
-      setIsWeatherDataFailed(false);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setIsWeatherDataFailed(true);
     }
   };

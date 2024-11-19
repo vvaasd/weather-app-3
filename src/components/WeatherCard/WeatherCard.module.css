@@ -1,5 +1,4 @@
 .wrapper {
-  overflow: hidden;
   display: flex;
 
   background-repeat: no-repeat;
@@ -22,6 +21,8 @@
   padding: 16px;
 
   color: var(--filled-light-100-dark-900);
+
+  border-radius: var(--std-border-radius);
 }
 
 .error {

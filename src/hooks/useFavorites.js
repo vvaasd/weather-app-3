@@ -6,6 +6,7 @@ export const useFavorites = () => {
   const [favorites, setFavorites] = useState(
     StorageService.get(LS_KEYS.favoriteCities) || [],
   );
+
   const onChangeFavorites = (weatherData) => {
     const newFavorites = [...favorites];
 
@@ -37,7 +38,7 @@ export const useFavorites = () => {
 
       setFavorites(favoritesWithWeather);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return { favorites, onChangeFavorites, fetchAndSetFavorites };
