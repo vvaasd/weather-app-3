@@ -10,6 +10,7 @@ body {
   font-family: var(--font-family);
   font-variant-numeric: lining-nums;
   letter-spacing: var(--std-letter-spacing);
+  overflow-y: scroll;
 }
 
 .btn-reset {
@@ -26,6 +27,12 @@ body {
 
 .blur {
   filter: blur(var(--std-blur));
+}
+
+.fixedScrollbar {
+  position: fixed;
+  overflow-y: scroll;
+  inline-size: 100%;
 }
 
 .skeleton {

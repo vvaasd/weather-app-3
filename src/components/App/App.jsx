@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { Footer, CityCard, CardList, Header, Slider, Error } from 'components';
 import { BlurContext, ThemeContext, WeatherContext } from 'context';
 import { background } from 'assets/img/background';
@@ -11,17 +11,29 @@ export const App = () => {
   const { weatherData, isWeatherDataFailed } = useContext(WeatherContext);
   const { theme } = useContext(ThemeContext);
 
+  const unlockFixedScrollbar = () => {
+    const scrollPosition = -parseInt(document.body.style.top, 10);
+    document.body.style.top = ``;
+
+    if (!scrollPosition) {
+      return;
+    }
+    window.scrollTo(0, scrollPosition);
+  };
+
   const highlightHeader = () => {
     contentToBlurRef.current.classList.add('blur');
-    document.body.style.overflowY = 'hidden';
+    document.body.style.top = `-${window.scrollY}px`;
+    document.body.classList.add('fixedScrollbar');
   };
 
   const unhighlightHeader = () => {
     contentToBlurRef.current.classList.remove('blur');
-    document.body.style.overflowY = 'auto';
+    document.body.classList.remove('fixedScrollbar');
+    unlockFixedScrollbar();
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (weatherData?.weather) {
       const imageKey = weatherData.weather.now.iconName.substr(0, 2);
       wrapperRef.current.style.backgroundImage = `url('${background[imageKey][theme]}')`;
