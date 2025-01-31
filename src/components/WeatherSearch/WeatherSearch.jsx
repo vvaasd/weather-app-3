@@ -1,5 +1,11 @@
 import { cn } from 'utils';
-import { useRef, useState, useContext, useEffect } from 'react';
+import {
+  useRef,
+  useState,
+  useContext,
+  useEffect,
+  startTransition,
+} from 'react';
 import { Dropdown, Input, SearchDropdownContent } from 'components';
 import { useDebounce, useOutsideInteraction } from 'hooks';
 import { SEARCH_STATUSES, LS_KEYS } from 'constants';
@@ -93,13 +99,16 @@ export const WeatherSearch = (props) => {
         getArray: true,
         signal,
       });
-
-      setQueryCities(citiesInfo);
-      setSearchStatus(SEARCH_STATUSES.history);
+      startTransition(() => {
+        setQueryCities(citiesInfo);
+        setSearchStatus(SEARCH_STATUSES.history);
+      });
     } catch (error) {
       if (error.name !== 'AbortError') {
-        setSearchStatus(SEARCH_STATUSES.notFound);
-        setQueryCities([]);
+        startTransition(() => {
+          setSearchStatus(SEARCH_STATUSES.notFound);
+          setQueryCities([]);
+        });
         console.error(error);
       }
     }

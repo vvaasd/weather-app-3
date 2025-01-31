@@ -6,11 +6,11 @@ import styles from './Input.module.css';
 
 const Input = (props, ref) => {
   const {
-    onSubmit = () => {},
+    onSubmit,
     value,
     onClear,
-    onFocus = () => {},
-    onBlur = () => {},
+    onFocus,
+    onBlur,
     onClickGeolocation,
     ...otherProps
   } = props;
@@ -30,7 +30,7 @@ const Input = (props, ref) => {
       })}
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit();
+        onSubmit?.();
       }}
     >
       <input
@@ -39,11 +39,11 @@ const Input = (props, ref) => {
         autoComplete="off"
         className={styles.input}
         onFocus={() => {
-          onFocus();
+          onFocus?.();
           setIsFocused(true);
         }}
         onBlur={() => {
-          onBlur();
+          onBlur?.();
           setIsFocused(false);
         }}
         {...otherProps}

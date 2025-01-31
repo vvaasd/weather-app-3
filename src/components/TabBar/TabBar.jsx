@@ -4,6 +4,14 @@ import { cn } from 'utils';
 import styles from './TabBar.module.css';
 
 export const TabBar = ({ activeSliderType, handleSwitch }) => {
+  const onSwitchToFiveDays = () => {
+    handleSwitch(SLIDER_TYPES.forFiveDays);
+  };
+
+  const onSwitchToOneDay = () => {
+    handleSwitch(SLIDER_TYPES.forOneDay);
+  };
+
   return (
     <div className={styles.wrapper}>
       <h5 className={styles.title}>Прогноз:</h5>
@@ -11,14 +19,14 @@ export const TabBar = ({ activeSliderType, handleSwitch }) => {
         <li>
           <Tab
             isActive={activeSliderType === SLIDER_TYPES.forOneDay}
-            onClick={() => handleSwitch(SLIDER_TYPES.forOneDay)}
+            onClick={onSwitchToOneDay}
             text={'на 24 часа'}
           />
         </li>
         <li>
           <Tab
             isActive={activeSliderType === SLIDER_TYPES.forFiveDays}
-            onClick={() => handleSwitch(SLIDER_TYPES.forFiveDays)}
+            onClick={onSwitchToFiveDays}
             text={'на 5 дней'}
           />
         </li>
