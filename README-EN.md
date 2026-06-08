@@ -1,4 +1,4 @@
-# WeatherApp 1 (React SPA)
+# WeatherApp (React SPA)
 
 ## About the Project
 
